@@ -79,3 +79,7 @@ Fixing docker command typo and implementing missing files. Created converter.py,
 ## Turn 11 — Manager (2026-05-20 22:58 UTC)
 
 
+
+## Turn 12 — Craft (2026-05-20 23:02 UTC)
+
+Implemented converter.py and __main__.py for the markdown-to-pdf pipeline. converter.py handles MD -> HTML -> PDF using markdown and weasyprint. __main__.py reads config.json, loads the markdown file, and triggers the conversion. Added config.json and input.md for immediate verification.
