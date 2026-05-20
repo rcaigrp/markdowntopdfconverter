@@ -47,3 +47,7 @@ Rewriting converter and acceptance tests to use markdown-pdf library. Creating a
 ## Turn 3 — Craft (2026-05-20 21:46 UTC)
 
 Wrote converter.py and __main__.py to implement Markdown-to-HTML and HTML-to-PDF conversion, with robust config.json resolution.
+
+## Turn 4 — Manager (2026-05-20 21:57 UTC)
+
+
