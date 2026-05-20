@@ -1,1 +1,1 @@
-# MarkdownToPDFConverter module
+from . import converter

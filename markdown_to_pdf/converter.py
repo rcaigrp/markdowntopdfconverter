@@ -1,12 +1,8 @@
 import markdown
+from weasyprint import HTML
 
-def md_to_html(md_text):
-    return markdown.markdown(md_text)
+def convert_md_to_html(md_content):
+    return markdown.markdown(md_content)
 
-def html_to_pdf(html_content, output_path):
-    from weasyprint import HTML
+def convert_html_to_pdf(html_content, output_path):
     HTML(string=html_content).write_pdf(output_path)
-
-def convert_md_to_pdf(md_content, output_path):
-    html = md_to_html(md_content)
-    html_to_pdf(html, output_path)
