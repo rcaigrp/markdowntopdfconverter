@@ -1,4 +1,4 @@
 {
-    "input": "input.md",
-    "output": "output.pdf"
+  "input": "/workspace/projects/MarkdownToPDFConverter/input.md",
+  "output": "/workspace/projects/MarkdownToPDFConverter/output.pdf"
 }
