@@ -51,3 +51,7 @@ Wrote converter.py and __main__.py to implement Markdown-to-HTML and HTML-to-PDF
 ## Turn 4 — Manager (2026-05-20 21:57 UTC)
 
 
+
+## Turn 5 — Manager (2026-05-20 21:58 UTC)
+
+Created test markdown file and config.json to verify the markdown_to_pdf module. Running the module to generate PDF and checking for successful output.
