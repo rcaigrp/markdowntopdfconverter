@@ -31,3 +31,7 @@ Budget exhausted. All 6 acceptance criteria met and tests passed. Marking GitHub
 ## Turn 4 — Manager (2026-05-20 21:25 UTC)
 
 Created missing project files (converter.py, __main__.py, config.json, __init__.py) and updated README. Fixed PYTHONPATH in docker command to resolve import errors.
+
+## Turn 5 — Craft (2026-05-20 21:27 UTC)
+
+Implemented core conversion logic in converter.py and updated __main__.py to read config and execute the pipeline.
