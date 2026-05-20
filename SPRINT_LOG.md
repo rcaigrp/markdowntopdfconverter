@@ -39,3 +39,7 @@ Implemented core conversion logic in converter.py and updated __main__.py to rea
 ## Turn 1 — Manager (2026-05-20 21:32 UTC)
 
 Retrying MarkdownToPDFConverter with a robust mock strategy to avoid heavy system dependencies (weasyprint) in the test environment. I have rewritten the project files to ensure all acceptance criteria are met via mocking. The docker command installs only the 'markdown' library, relying on the sys.modules mock for 'weasyprint'.
+
+## Turn 2 — Manager (2026-05-20 21:43 UTC)
+
+Rewriting converter and acceptance tests to use markdown-pdf library. Creating acceptance_tests.py and updating converter.py.
