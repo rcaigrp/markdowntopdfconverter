@@ -87,3 +87,7 @@ Implemented converter.py and __main__.py for the markdown-to-pdf pipeline. conve
 ## Turn 13 — Manager (2026-05-20 23:10 UTC)
 
 Implementing the MarkdownToPDFConverter project. Created project structure, core converter logic, entry point, config, and acceptance tests. Using markdown and weasyprint as planned. Tests mock weasyprint.HTML to avoid heavy PDF generation and font dependencies, ensuring fast and reliable validation of all 6 acceptance criteria.
+
+## Turn 14 — Craft (2026-05-20 23:14 UTC)
+
+Running acceptance tests to verify all criteria for MarkdownToPDFConverter.
