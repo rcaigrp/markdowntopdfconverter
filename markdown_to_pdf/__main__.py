@@ -1,20 +1,29 @@
-import sys
-import os
 import json
+import os
+from pathlib import Path
+from converter import convert_md_to_html, convert_html_to_pdf
 
-project_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(project_dir)
+def main():
+    project_root = Path(__file__).parent.parent
+    config_path = project_root / "config.json"
+    
+    if not config_path.exists():
+        config_path = Path("config.json")
+    
+    with open(config_path) as f:
+        config = json.load(f)
+    
+    input_path = config["input_path"]
+    output_path = config["output_path"]
+    
+    with open(input_path) as f:
+        md_content = f.read()
+    
+    html_content = convert_md_to_html(md_content)
+    pdf_bytes = convert_html_to_pdf(html_content)
+    
+    with open(output_path, "wb") as f:
+        f.write(pdf_bytes)
 
-config_path = os.path.join(project_dir, "config.json")
-with open(config_path, 'r') as f:
-    config = json.load(f)
-
-input_path = config['input']
-output_path = config['output']
-
-with open(input_path, 'r') as f:
-    md_content = f.read()
-
-html_content = markdown.markdown(md_content)
-
-HTML(string=html_content).write_pdf(output_path)
+if __name__ == "__main__":
+    main()
