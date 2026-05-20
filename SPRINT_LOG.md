@@ -83,3 +83,7 @@ Fixing docker command typo and implementing missing files. Created converter.py,
 ## Turn 12 — Craft (2026-05-20 23:02 UTC)
 
 Implemented converter.py and __main__.py for the markdown-to-pdf pipeline. converter.py handles MD -> HTML -> PDF using markdown and weasyprint. __main__.py reads config.json, loads the markdown file, and triggers the conversion. Added config.json and input.md for immediate verification.
+
+## Turn 13 — Manager (2026-05-20 23:10 UTC)
+
+Implementing the MarkdownToPDFConverter project. Created project structure, core converter logic, entry point, config, and acceptance tests. Using markdown and weasyprint as planned. Tests mock weasyprint.HTML to avoid heavy PDF generation and font dependencies, ensuring fast and reliable validation of all 6 acceptance criteria.
