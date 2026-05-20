@@ -1,0 +1,1 @@
+{"goal": "Convert Markdown documents to PDF files using Python.", "acceptance_criteria": ["Module runs via python -m markdown_to_pdf", "Reads input/output paths from a config file", "Converts Markdown to HTML", "Converts HTML to PDF", "Saves PDF to output path", "Project structure is valid"], "meeting_budget": 5, "meetings_held": 0, "status": "active"}
