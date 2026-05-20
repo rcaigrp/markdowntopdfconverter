@@ -91,3 +91,7 @@ Implementing the MarkdownToPDFConverter project. Created project structure, core
 ## Turn 14 — Craft (2026-05-20 23:14 UTC)
 
 Running acceptance tests to verify all criteria for MarkdownToPDFConverter.
+
+## Turn 15 — Manager (2026-05-20 23:27 UTC)
+
+Refactoring project to use pure-Python libraries (markdown, fpdf) to avoid system-level dependency failures (weasyprint requires C++ libs). Rewriting implementation and acceptance tests to mock fpdf safely. Updating project files.
