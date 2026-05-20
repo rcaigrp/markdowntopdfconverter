@@ -1,20 +1,18 @@
-import sys
 import os
-from converter import MarkdownToPDFConverter
+import json
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from convert import convert_md_to_pdf
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: python -m markdown_to_pdf <input_path> <output_path>")
-        sys.exit(1)
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+    with open(config_path, 'r') as f:
+        config = json.load(f)
     
-    input_path = sys.argv[1]
-    output_path = sys.argv[2]
+    input_path = config.get('input')
+    output_path = config.get('output')
     
-    # Try to find config relative to script or project dir
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config.json')
-    converter = MarkdownToPDFConverter(config_path)
-    converter.convert(input_path, output_path)
-    print(f"Saved PDF to {output_path}")
+    convert_md_to_pdf(input_path, output_path)
 
 if __name__ == '__main__':
     main()

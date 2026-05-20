@@ -103,3 +103,7 @@ Refactoring project to use pure-Python libraries (markdown, fpdf) to avoid syste
 ## Turn 17 — Craft (2026-05-20 23:41 UTC)
 
 Rewrote the project using fpdf2 and markdown libraries. Fixed the previous typo and implemented a robust markdown-to-PDF converter. Created acceptance_tests.py to validate the PDF generation.
+
+## Turn 18 — Craft (2026-05-20 23:49 UTC)
+
+
