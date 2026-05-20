@@ -1,29 +1,35 @@
 import json
 import os
-from pathlib import Path
-from converter import convert_md_to_html, convert_html_to_pdf
+import sys
+from markdown_to_pdf.converter import read_md, md_to_html, html_to_pdf
 
 def main():
-    project_root = Path(__file__).parent.parent
-    config_path = project_root / "config.json"
+    # Find config.json relative to this file's directory
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(base_dir, 'config.json')
     
-    if not config_path.exists():
-        config_path = Path("config.json")
-    
-    with open(config_path) as f:
+    if not os.path.exists(config_path):
+        print(f"Error: config.json not found at {config_path}")
+        sys.exit(1)
+        
+    with open(config_path, 'r') as f:
         config = json.load(f)
+        
+    input_path = config['input']
+    output_path = config['output']
     
-    input_path = config["input_path"]
-    output_path = config["output_path"]
-    
-    with open(input_path) as f:
-        md_content = f.read()
-    
-    html_content = convert_md_to_html(md_content)
-    pdf_bytes = convert_html_to_pdf(html_content)
-    
-    with open(output_path, "wb") as f:
-        f.write(pdf_bytes)
+    if not os.path.exists(input_path):
+        print(f"Error: Input file not found at {input_path}")
+        sys.exit(1)
+        
+    try:
+        md_text = read_md(input_path)
+        html = md_to_html(md_text)
+        html_to_pdf(html, output_path)
+        print(f"PDF generated at {output_path}")
+    except Exception as e:
+        print(f"Error during conversion: {e}")
+        sys.exit(1)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
