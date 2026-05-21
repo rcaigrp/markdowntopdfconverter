@@ -1,6 +1,5 @@
 import json
 
-def load_config(config_path):
-    with open(config_path, 'r') as f:
-        config = json.load(f)
-    return config['input_path'], config['output_path']
+def load_config(path):
+    with open(path, 'r') as f:
+        return json.load(f)
