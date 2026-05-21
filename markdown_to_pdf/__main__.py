@@ -1,19 +1,14 @@
-"""Entry point for python -m markdown_to_pdf"""
 import sys
-import os
+from markdown_to_pdf.main import load_config, md_to_html, html_to_pdf
 
 def main():
-    """Main entry point for the markdown to PDF converter."""
-    config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'config.json')
-    if not os.path.exists(config_path):
-        print(f"Config file not found: {config_path}")
-        sys.exit(1)
-    
-    from markdown_to_pdf.config import load_config
-    from markdown_to_pdf.converter import convert_markdown_to_pdf
-    
+    config_path = sys.argv[1] if len(sys.argv) > 1 else 'config.json'
     config = load_config(config_path)
-    convert_markdown_to_pdf(config['input_path'], config['output_path'])
+    with open(config['input'], 'r') as f:
+        md_text = f.read()
+    html = md_to_html(md_text)
+    html_to_pdf(html, config['output'])
+    print(f"PDF saved to {config['output']}")
 
 if __name__ == '__main__':
     main()
