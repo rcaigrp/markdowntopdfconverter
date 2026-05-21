@@ -1,22 +1,23 @@
 import sys
-from markdown_to_pdf.config import load_config
-from markdown_to_pdf.converter import md_to_html, html_to_text, generate_pdf
+import os
+from config import load_config
+from converter import md_to_html, html_to_pdf
 
 def main():
-    config_path = "config.json"
-    if len(sys.argv) > 1:
-        config_path = sys.argv[1]
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+    if not os.path.exists(config_path):
+        print(f"Config file not found: {config_path}", file=sys.stderr)
+        sys.exit(1)
         
-    config = load_config(config_path)
-    input_path = config['input_path']
-    output_path = config['output_path']
+    input_path, output_path = load_config(config_path)
     
-    with open(input_path) as f:
-        md_text = f.read()
+    with open(input_path, 'r') as f:
+        md_content = f.read()
         
-    html_text = md_to_html(md_text)
-    text = html_to_text(html_text)
-    generate_pdf(text, output_path)
+    html_content = md_to_html(md_content)
+    html_to_pdf(html_content, output_path)
+    
+    print(f"PDF generated at {output_path}")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

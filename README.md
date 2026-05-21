@@ -14,4 +14,4 @@ Automate PDF generation from Markdown content.
 6. Project structure is valid and runnable.
 
 ## Status
-🔄 ACTIVE - Sprint meeting 2/5. Project files created and tests configured.
+🔄 ACTIVE - Sprint meeting 3/5. Fixed imports and added acceptance tests.
