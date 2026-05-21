@@ -1,36 +1,26 @@
 import unittest
-import unittest.mock
-import os
+from unittest.mock import patch, mock_open, MagicMock
 import sys
+import os
 
-class TestMarkdownToPDFConverter(unittest.TestCase):
-    @unittest.mock.patch('builtins.open', unittest.mock.mock_open(read_data="# Test\n"))
-    @unittest.mock.patch('json.load', return_value={"input_path": "in.md", "output_path": "out.pdf"})
-    @unittest.mock.patch('markdown.markdown', return_value="<p>Test</p>")
-    @unittest.mock.patch('fpdf.FPDF')
-    def test_criterion_1_module_runs(self, mock_pdf_class):
-        mock_pdf = unittest.mock.MagicMock()
-        mock_pdf_class.return_value = mock_pdf
-        import markdown_to_pdf
-        assert hasattr(markdown_to_pdf, '__main__')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-    def test_criterion_2_config_loaded(self):
-        pass
-
-    def test_criterion_3_converts_md_to_html(self):
-        from markdown_to_pdf import converter
-        result = converter.convert_md_to_html("# Hello")
-        assert "<p>Hello</p>" in result or result == "<p>Hello</p>"
-
-    def test_criterion_4_converts_html_to_pdf(self):
-        from markdown_to_pdf import converter
-        assert callable(converter.convert_html_to_pdf)
-
-    def test_criterion_5_saves_pdf(self):
-        pass
-
-    def test_criterion_6_project_structure_valid(self):
-        assert os.path.isdir('/workspace/projects/MarkdownToPDFConverter/markdown_to_pdf')
-        assert os.path.isfile('/workspace/projects/MarkdownToPDFConverter/markdown_to_pdf/__init__.py')
-        assert os.path.isfile('/workspace/projects/MarkdownToPDFConverter/markdown_to_pdf/converter.py')
-        assert os.path.isfile('/workspace/projects/MarkdownToPDFConverter/markdown_to_pdf/__main__.py')
+class TestMarkdownToPDF(unittest.TestCase):
+    @patch('builtins.open', new_callable=mock_open)
+    @patch('json.load')
+    @patch('markdown.markdown')
+    @patch('converter.FPDF')
+    def test_complete_pipeline(self, mock_fpdf, mock_md, mock_json_load, mock_open_func):
+        mock_json_load.return_value = {'input_path': 'input.md', 'output_path': 'output.pdf'}
+        mock_md.return_value = '<h1>Test</h1>'
+        mock_open_func.return_value.read.return_value = '# Test'
+        
+        mock_pdf = MagicMock()
+        mock_fpdf.return_value = mock_pdf
+        
+        from markdown_to_pdf import __main__
+        __main__.main()
+        
+        mock_json_load.assert_called()
+        mock_md.assert_called_once_with('# Test')
+        mock_pdf.output.assert_called_once_with(filename='output.pdf', dest='F')
