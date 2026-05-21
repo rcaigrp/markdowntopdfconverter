@@ -1,15 +1,29 @@
 import markdown
+import json
+import os
 from fpdf import FPDF
 
-def convert_md_to_pdf(input_path: str, output_path: str) -> None:
-    with open(input_path, 'r', encoding='utf-8') as f:
-        md_text = f.read()
+
+def convert_markdown_to_pdf(input_path, output_path):
+    """Convert markdown file to PDF."""
+    # Read markdown content
+    with open(input_path, 'r') as f:
+        md_content = f.read()
     
-    html_text = markdown.markdown(md_text)
+    # Convert markdown to HTML
+    html_content = markdown.markdown(md_content)
     
+    # Create PDF from HTML
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Helvetica", size=12)
-    pdf.html(html_text)
+    pdf.html(html_content)
     
+    # Save PDF
     pdf.output(output_path)
+
+
+def read_config(config_path='config.json'):
+    """Read input/output paths from config file."""
+    with open(config_path) as f:
+        config = json.load(f)
+    return config.get('input_path', 'input.md'), config.get('output_path', 'output.pdf')

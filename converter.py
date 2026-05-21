@@ -1,16 +1,20 @@
 import markdown
+import os
 from fpdf import FPDF
-from fpdf import HTMLMixin
 
-class PDF(FPDF, HTMLMixin):
-    pass
-
-def convert_md_to_pdf(input_path, output_path):
-    with open(input_path, 'r') as f:
+def convert_markdown_to_pdf(input_path, output_path):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    with open(input_path, 'r', encoding='utf-8') as f:
         md_content = f.read()
     html_content = markdown.markdown(md_content)
-    pdf = PDF()
+    pdf = FPDF()
     pdf.add_page()
-    pdf.html(html_content, x=0, y=0)
-    pdf.output(output_path, local=False)
-    return output_path
+    pdf.set_font('Helvetica', size=12)
+    pdf.html(html_content, x=10, y=10)
+    pdf.output(output_path)
+
+def read_config(config_path='config.json'):
+    import json
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    return config.get('input_path', 'input.md'), config.get('output_path', 'output.pdf')

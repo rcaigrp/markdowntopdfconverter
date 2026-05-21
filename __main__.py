@@ -1,13 +1,19 @@
-import json
-import os
 import sys
-from converter import convert_md_to_pdf
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from markdown_to_pdf.converter import convert_markdown_to_pdf, read_config
 
 def main():
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-    with open(config_path, 'r') as f:
-        config = json.load(f)
-    convert_md_to_pdf(config['input_path'], config['output_path'])
+    input_path = 'input.md'
+    output_path = 'output.pdf'
+    config_path = 'config.json'
+    
+    if os.path.exists(config_path):
+        input_path, output_path = read_config(config_path)
+    
+    convert_markdown_to_pdf(input_path, output_path)
 
 if __name__ == '__main__':
     main()
