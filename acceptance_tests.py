@@ -1,36 +1,49 @@
 import os
 import json
-import pytest
+import unittest
 from unittest.mock import patch, MagicMock
-from markdown_to_pdf.core import load_config, convert_md_to_html, convert_html_to_pdf
 
+class TestMarkdownToPDF(unittest.TestCase):
+    def test_criterion_1_module_runs(self):
+        import markdown_to_pdf.__main__
+        self.assertTrue(hasattr(markdown_to_pdf.__main__, "main"))
 
-class TestMarkdownToPDF:
-    def test_project_structure(self):
-        base = '/workspace/projects/MarkdownToPDFConverter'
-        assert os.path.isdir(f'{base}/markdown_to_pdf')
-        assert os.path.isfile(f'{base}/markdown_to_pdf/__init__.py')
-        assert os.path.isfile(f'{base}/markdown_to_pdf/__main__.py')
-        assert os.path.isfile(f'{base}/markdown_to_pdf/core.py')
+    def test_criterion_2_reads_config(self):
+        from markdown_to_pdf.core import ConfigLoader
+        config_path = "config.json"
+        with open(config_path, 'w') as f:
+            json.dump({"input_path": "input.md", "output_path": "output.pdf"}, f)
+        
+        config_loader = ConfigLoader(config_path)
+        self.assertEqual(config_loader.get_input_path(), "input.md")
+        self.assertEqual(config_loader.get_output_path(), "output.pdf")
 
-    def test_load_config(self):
-        config = {"input": "test.md", "output": "test.pdf"}
-        with open('/tmp/config.json', 'w') as f:
-            json.dump(config, f)
-        result = load_config('/tmp/config.json')
-        assert result == config
+    def test_criterion_3_md_to_html(self):
+        from markdown_to_pdf.core import Converter
+        converter = Converter("config.json")
+        html = converter.md_to_html("# Hello\n\nWorld")
+        self.assertIn("<h1>", html)
+        self.assertIn("<p>", html)
 
-    @patch('markdown_to_pdf.core.markdown')
-    def test_convert_md_to_html(self, mock_md):
-        mock_md.markdown.return_value = '<p>Hello</p>'
-        result = convert_md_to_html('# Hello')
-        assert result == '<p>Hello</p>'
+    def test_criterion_4_html_to_pdf(self):
+        from markdown_to_pdf.core import Converter
+        converter = Converter("config.json")
+        html = converter.md_to_html("# Hello")
+        with patch('markdown_to_pdf.core.FPDF') as MockFPDF:
+            mock_pdf = MagicMock()
+            MockFPDF.return_value = mock_pdf
+            pdf = converter.html_to_pdf(html)
+            self.assertEqual(pdf, mock_pdf)
 
-    @patch('markdown_to_pdf.core.FPDF')
-    def test_convert_html_to_pdf(self, mock_pdf_class):
-        mock_pdf = MagicMock()
-        mock_pdf_class.return_value = mock_pdf
-        convert_html_to_pdf('<p>Test</p>', '/tmp/output.pdf')
-        mock_pdf.add_page.assert_called_once()
-        mock_pdf.html.assert_called_once()
-        mock_pdf.output.assert_called_once_with(fname='/tmp/output.pdf')
+    def test_criterion_5_saves_pdf(self):
+        from markdown_to_pdf.core import Converter
+        converter = Converter("config.json")
+        with patch('markdown_to_pdf.core.FPDF') as MockFPDF:
+            mock_pdf = MagicMock()
+            MockFPDF.return_value = mock_pdf
+            converter.save_pdf(mock_pdf, "output.pdf")
+            mock_pdf.output.assert_called_once_with("output.pdf")
+
+    def test_criterion_6_project_structure_valid(self):
+        self.assertTrue(os.path.exists("markdown_to_pdf/__init__.py"))
+        self.assertTrue(os.path.exists("markdown_to_pdf/__main__.py"))

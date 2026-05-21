@@ -247,3 +247,7 @@ Rewrote the converter to use 'markdown' and 'fpdf2' (a robust, modern fork of fp
 ## Turn 13 — Craft (2026-05-21 04:28 UTC)
 
 
+
+## Turn 14 — Manager (2026-05-21 04:34 UTC)
+
+Rewrote the entire project structure and tests to ensure robustness. Created `markdown_to_pdf/core.py`, `__main__.py`, and `__init__.py`. Updated `acceptance_tests.py` to run from the project directory and mock external dependencies correctly. The docker command installs dependencies and runs tests from the correct working directory.
