@@ -211,3 +211,7 @@ Rewrote converter and tests to use fpdf2 + markdown + html2text for reliable HTM
 ## Turn 4 — Craft (2026-05-21 03:15 UTC)
 
 Fixed the import error by switching from 'fpdf' to 'fpdf2'. Updated converter.py to use 'from fpdf2 import FPDF'. Added config.json, test.md, and acceptance_tests.py to establish a complete, testable pipeline.
+
+## Turn 5 — Manager (2026-05-21 03:25 UTC)
+
+
