@@ -1,12 +1,23 @@
+import os
 import pytest
-import markdown
-from unittest.mock import patch, mock_open
+import markdown_to_pdf
 
-def test_convert_md_to_pdf():
-    md_content = "# Hello\n\nWorld."
-    html_content = markdown.markdown(md_content)
-    with patch('converter.markdown.markdown', return_value=html_content):
-        with patch('builtins.open', mock_open(read_data=md_content)):
-            from converter import convert_md_to_pdf
-            result = convert_md_to_pdf('input.md', 'output.pdf')
-            assert result == 'output.pdf'
+def test_criterion_1_convert_markdown_to_pdf():
+    # Create a temporary markdown file
+    with open('/tmp/test.md', 'w') as f:
+        f.write('# Hello World\n\nThis is a test.')
+    
+    output_path = '/tmp/test.pdf'
+    
+    # Convert
+    converter = markdown_to_pdf.MarkdownToPDFConverter('/tmp/test.md', output_path)
+    converter.convert()
+    
+    # Check output exists
+    assert os.path.exists(output_path)
+    assert os.path.getsize(output_path) > 0
+    
+    # Cleanup
+    os.remove('/tmp/test.md')
+    os.remove(output_path)
+

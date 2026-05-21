@@ -1,11 +1,19 @@
 import markdown
-import fpdf
+from fpdf import FPDF
 
-def convert_md_to_html(md_content):
-    return markdown.markdown(md_content)
+class MarkdownToPDFConverter:
+    def __init__(self, input_path, output_path):
+        self.input_path = input_path
+        self.output_path = output_path
 
-def convert_html_to_pdf(html_content, output_path):
-    pdf = fpdf.FPDF()
-    pdf.add_page()
-    pdf.html(html_content, link='https://example.com')
-    pdf.output(output_path)
+    def convert(self):
+        with open(self.input_path, 'r') as f:
+            md_content = f.read()
+        
+        html_content = markdown.markdown(md_content)
+        
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Helvetica")
+        pdf.html(html_content)
+        pdf.output(self.output_path)

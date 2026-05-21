@@ -1,19 +1,14 @@
-import sys
+import json
 import os
-from markdown_to_pdf.config import load_config
-from markdown_to_pdf.converter import convert_md_to_html, convert_html_to_pdf
+from markdown_to_pdf.converter import MarkdownToPDFConverter
 
 def main():
-    if len(sys.argv) > 1:
-        config_path = sys.argv[1]
-    else:
-        print("Usage: python -m markdown_to_pdf <config_path>")
-        return
-    input_path, output_path = load_config(config_path)
-    with open(input_path, 'r') as f:
-        md_content = f.read()
-    html_content = convert_md_to_html(md_content)
-    convert_html_to_pdf(html_content, output_path)
+    config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.json')
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    
+    converter = MarkdownToPDFConverter(config['input_path'], config['output_path'])
+    converter.convert()
 
 if __name__ == '__main__':
     main()
