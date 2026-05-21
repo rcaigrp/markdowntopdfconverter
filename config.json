@@ -1,4 +1,4 @@
 {
-  "input_path": "input.md",
-  "output_path": "output.pdf"
+  "input": "sample.md",
+  "output": "output.pdf"
 }

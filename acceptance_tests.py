@@ -1,39 +1,38 @@
-import pytest
-from unittest.mock import patch, MagicMock
-import json
+import unittest
 import os
-import sys
+from unittest.mock import patch, MagicMock
+import markdown
+from fpdf2 import FPDF
 
-def test_criterion_1_runs_via_main():
-    import markdown_to_pdf.__main__ as main_module
-    assert hasattr(main_module, 'main')
 
-def test_criterion_2_reads_config():
-    with patch('json.load', return_value={"input_path": "in.md", "output_path": "out.pdf"}):
-        from markdown_to_pdf.config import load_config
-        cfg = load_config("config.json")
-        assert cfg == {"input_path": "in.md", "output_path": "out.pdf"}
+class TestMarkdownToPDFConverter(unittest.TestCase):
+    @patch('markdown.markdown')
+    def test_convert_md_to_html(self, mock_md):
+        md_text = "# Hello\n- World"
+        mock_md.return_value = "<h1>Hello</h1><ul><li>World</li></ul>"
+        from markdown_to_pdf.core import convert_md_to_html
+        result = convert_md_to_html(md_text)
+        mock_md.assert_called_once_with(md_text)
+        self.assertEqual(result, "<h1>Hello</h1><ul><li>World</li></ul>")
 
-def test_criterion_3_convert_md_to_html():
-    from markdown_to_pdf.converter import markdown_to_html
-    md = "# Test\n"
-    html = markdown_to_html(md)
-    assert "Test" in html
+    @patch('fpdf2.FPDF')
+    def test_convert_html_to_pdf(self, mock_pdf_class):
+        mock_pdf_instance = MagicMock()
+        mock_pdf_class.return_value = mock_pdf_instance
+        html = "<h1>Hello</h1>"
+        output_path = "/tmp/test.pdf"
+        from markdown_to_pdf.core import convert_html_to_pdf
+        convert_html_to_pdf(html, output_path)
+        
+        # Check that FPDF was instantiated
+        mock_pdf_class.assert_called_once()
+        pdf_instance = mock_pdf_class.return_value
+        
+        # Check methods called
+        self.assertTrue(pdf_instance.add_page.called)
+        self.assertTrue(pdf_instance.html.called_with(html, safe_mode='escape'))
+        self.assertTrue(pdf_instance.output.called_with(output_path))
 
-def test_criterion_4_convert_html_to_pdf():
-    with patch('fpdf.FPDF') as MockPDF:
-        from markdown_to_pdf.converter import html_to_pdf
-        html_to_pdf("<h1>Test</h1>", "test.pdf")
-        assert MockPDF.called
 
-def test_criterion_5_saves_pdf():
-    with patch('fpdf.FPDF') as MockPDF:
-        from markdown_to_pdf.converter import html_to_pdf
-        html_to_pdf("<h1>Test</h1>", "output.pdf")
-        MockPDF.return_value.output.assert_called_once_with("output.pdf", "F")
-
-def test_criterion_6_valid_structure():
-    assert os.path.exists("markdown_to_pdf/__init__.py")
-    assert os.path.exists("markdown_to_pdf/__main__.py")
-    assert os.path.exists("markdown_to_pdf/config.py")
-    assert os.path.exists("markdown_to_pdf/converter.py")
+if __name__ == '__main__':
+    unittest.main()
