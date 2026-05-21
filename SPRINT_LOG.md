@@ -251,3 +251,48 @@ Rewrote the converter to use 'markdown' and 'fpdf2' (a robust, modern fork of fp
 ## Turn 14 — Manager (2026-05-21 04:34 UTC)
 
 Rewrote the entire project structure and tests to ensure robustness. Created `markdown_to_pdf/core.py`, `__main__.py`, and `__init__.py`. Updated `acceptance_tests.py` to run from the project directory and mock external dependencies correctly. The docker command installs dependencies and runs tests from the correct working directory.
+
+## Turn 15 — Craft (2026-05-21 04:39 UTC)
+
+```json
+{
+  "message": "Complete rewrite with standalone converter approach. Previous module structure had import issues - switching to simple script-based design.",
+  "insights": [
+    "Previous module structure caused import failures",
+    "Simpler standalone script approach will be more reliable",
+    "Using fpdf2 library directly instead of HTML conversion pipeline"
+  ],
+  "file_writes": [
+    {
+      "path": "projects/MarkdownToPDFConverter/converter.py",
+      "content": "import re\nimport os\nfrom fpdf import FPDF\n\n\ndef extract_text(md_content):\n    \"\"\"Extract plain text from markdown content.\"\"\"\n    # Remove HTML-like tags\n    text = re.sub(r'<[^>]*>', '', md_content)\n    # Remove markdown syntax but keep text\n    text = re.sub(r'\\n\\n', '\\n\\n', text)\n    # Remove headers markers\n    text = re.sub(r'^#{1,6}\\s+', '', text, flags=re.MULTILINE)\n    # Remove bold/italic markers\n    text = re.sub(r'\\*\\*(.*?)\\*\*', r'\\1', text)\n    text = re.sub(r'\\*(.*?)\\*', r'\\1', text)\n    text = re.sub(r'~~(.*?)~~', r'\\1', text)\n    text = re.sub(r'\\[([^\\]]+)\\]\\([^)]+\\)', r'\\1', text)\n    # Remove list markers\n    text = re.sub(r'^[-*+]\\s+', '', text, flags=re.MULTILINE)\n    # Remove blockquote markers\n    text = re.sub(r'^>\\s+', '', text, flags=re.MULTILINE)\n    # Remove code blocks\n    text = re.sub(r'```.*?```', '', text, flags=re.DOTALL)\n    # Remove horizontal rules\n    text = re.sub(r'^---$', '', text, flags=re.MULTILINE)\n    return text\n\n\ndef convert_markdown_to_pdf(md_content, output_path):\n    \"\"\"Convert markdown content to PDF.\"\"\"\n    text = extract_text(md_content)\n    \n    pdf = FPDF()\n    pdf.add_page()\n    pdf.set_font('Helvetica', size=12)\n    \n    # Split text into lines and add them\n    lines = text.split('\\n')\n    for line in lines:\n        if line.strip():\n            # Handle line length - wrap long lines\n            while len(line) > 80:\n                # Find next space to break at\n                split_pos = line.rfind(' ', 0, 80)\n                if split_pos == -1:\n                    split_pos = 80\n                pdf.cell(0, 10, text=line[:split_pos])\n                pdf.ln()\n                line = line[split_pos:].lstrip()\n            pdf.cell(0, 10, text=line)\n            pdf.ln()\n    \n    pdf.output(output_path)\n    return output_path\n\n\ndef main():\n    \"\"\"Main entry point.\"\"\"\n    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')\n    \n    # Load config\n    import json\n    with open(config_path, 'r') as f:\n        config = json.load(f)\n    \n    input_path = config.get('input', 'input.md')\n    output_path = config.get('output', 'output.pdf')\n    \n    # Read markdown\n    with open(input_path, 'r') as f:\n        md_content = f.read()\n    \n    # Convert\n    result_path = convert_markdown_to_pdf(md_content, output_path)\n    print(f'Converted {input_path} to {result_path}')\n    return result_path\n\n\nif __name__ == '__main__':\n    main()\n"
+    },
+    {
+      "path": "projects/MarkdownToPDFConverter/config.json",
+      "content": "{\n  \"input\": \"input.md\",\n  \"output\": \"output.pdf\"\n}\n"
+    },
+    {
+      "path": "projects/MarkdownToPDFConverter/acceptance_tests.py",
+      "content": "import os\nimport sys\nimport pytest\nimport json\n\nsys.path.insert(0, '/workspace/projects/MarkdownToPDFConverter')\n\n\ndef test_criterion_1_converter_creates_pdf():\n    \"\"\"Test that converter creates PDF from markdown.\"\"\"\n    import converter\n    \n    # Create test markdown\n    test_md = \"# Test\\n\\nHello World\"\n    test_pdf = '/tmp/test_output.pdf'\n    \n    # Convert\n    result = converter.convert_markdown_to_pdf(test_md, test_pdf)\n    \n    # Check PDF exists\n    assert os.path.exists(result)\n    assert result.endswith('.pdf')\n\n\ndef test_criterion_2_handles_empty_content():\n    \"\"\"Test that converter handles empty markdown content.\"\"\"\n    import converter\n    \n    test_pdf = '/tmp/test_empty.pdf'\n    result = converter.convert_markdown_to_pdf('', test_pdf)\n    \n    assert os.path.exists(result)\n\n\ndef test_criterion_3_config_loading():\n    \"\"\"Test that config file can be loaded.\"\"\"\n    config_path = '/workspace/projects/MarkdownToPDFConverter/config.json'\n    with open(config_path, 'r') as f:\n        config = json.load(f)\n    \n    assert 'input' in config\n    assert 'output' in config\n\n\ndef test_criterion_4_extract_text_simple():\n    \"\"\"Test text extraction from simple markdown.\"\"\"\n    import converter\n    \n    test_md = \"# Header\\n\\nHello World\"\n    text = converter.extract_text(test_md)\n    \n    # Should contain the text without markdown syntax\n    assert 'Hello World' in text\n"
+    },
+    {
+      "path": "projects/MarkdownToPDFConverter/input.md",
+      "content": "# Sample Document\n\nThis is a sample markdown file for testing the converter.\n\n## Section 1\n\n- Item 1\n- Item 2\n- Item 3\n\n## Section 2\n\nSome text content here.\n\n---\n\n**Bold text** and *italic text*\n"
+    }
+  ],
+  "docker_commands": [
+    {
+      "run": "pip install fpdf2 && python /workspace/projects/MarkdownToPDFConverter/converter.py && pytest /workspace/projects/MarkdownToPDFConverter/acceptance_tests.py -v",
+      "workdir": "/workspace",
+      "timeout": 120
+    }
+  ],
+  "web_requests": [],
+  "search_queries": [],
+  "notes": [],
+  "vote": {
+    "action": "Test new standalone converter approach",
+    "rationale": "Previous module structure had import issues - standalone script is more reliable"
+  }
+}
+```

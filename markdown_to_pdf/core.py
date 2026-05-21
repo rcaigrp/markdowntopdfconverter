@@ -1,31 +1,20 @@
-import markdown
 import json
-from fpdf2 import FPDF
+import markdown
+from fpdf import FPDF, HTMLMixin
 
-class ConfigLoader:
-    def __init__(self, config_path):
-        with open(config_path, 'r') as f:
-            self.config = json.load(f)
+def load_config(config_path: str) -> dict:
+    with open(config_path, 'r') as f:
+        return json.load(f)
 
-    def get_input_path(self):
-        return self.config.get('input_path')
+def convert_markdown_to_html(md_content: str) -> str:
+    return markdown.markdown(md_content)
 
-    def get_output_path(self):
-        return self.config.get('output_path')
+class PDF(FPDF, HTMLMixin):
+    pass
 
-class Converter:
-    def __init__(self, config_path):
-        self.config = ConfigLoader(config_path)
-
-    def md_to_html(self, markdown_text):
-        return markdown.markdown(markdown_text)
-
-    def html_to_pdf(self, html):
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.html(html)
-        return pdf
-
-    def save_pdf(self, pdf, path):
-        pdf.output(path)
+def convert_html_to_pdf(html_content: str) -> bytes:
+    pdf = PDF()
+    pdf.add_page()
+    pdf.set_font("Helvetica", size=12)
+    pdf.html(html_content)
+    return pdf.output(dest="S")
