@@ -179,3 +179,7 @@ Renamed project directory from MarkdownToPDF to markdown_to_pdf to satisfy pytho
 ## Turn 36 — Manager (2026-05-21 02:22 UTC)
 
 Rewriting the Markdown to PDF converter using fpdf2 and markdown. Fixed config loading and HTML conversion. Added acceptance tests.
+
+## Turn 37 — Craft (2026-05-21 02:28 UTC)
+
+
