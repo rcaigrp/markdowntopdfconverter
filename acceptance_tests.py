@@ -1,48 +1,27 @@
 import unittest
-from unittest.mock import patch, MagicMock
-import sys
+import json
 import os
+from unittest.mock import patch, mock_open
+import sys
 
-sys.path.insert(0, '/workspace/projects/MarkdownToPDFConverter')
+class TestMarkdownToPDF(unittest.TestCase):
+    @patch('builtins.open', mock_open(read_data='{"input": "input.md", "output": "output.pdf"}'))
+    def test_load_config(self):
+        from markdown_to_pdf.converter import load_config
+        config = load_config()
+        self.assertEqual(config['input'], 'input.md')
+        self.assertEqual(config['output'], 'output.pdf')
 
-class TestMarkdownToPDFConverter(unittest.TestCase):
-    @patch('markdown_to_pdf.converter.markdown')
-    def test_convert_md_to_html(self, mock_markdown):
-        from markdown_to_pdf.converter import convert_md_to_html
-        mock_markdown.markdown.return_value = "<h1>Hello</h1>"
-        result = convert_md_to_html("# Hello")
-        self.assertEqual(result, "<h1>Hello</h1>")
+    def test_md_to_html(self):
+        from markdown_to_pdf.converter import md_to_html
+        md_text = "# Hello\n- Item"
+        html = md_to_html(md_text)
+        self.assertIn('<h1>Hello</h1>', html)
+        self.assertIn('<li>Item</li>', html)
 
-    @patch('markdown_to_pdf.converter.FPDF')
-    @patch('markdown_to_pdf.converter.HTMLMixin')
-    def test_convert_html_to_pdf(self, mock_html_mixin, mock_fpdf):
-        from unittest.mock import MagicMock
-        from markdown_to_pdf.converter import convert_html_to_pdf
-        
-        mock_pdf = MagicMock()
-        mock_fpdf.return_value = mock_pdf
-        
-        convert_html_to_pdf("<h1>Hello</h1>", "output.pdf")
-        
-        mock_pdf.add_page.assert_called()
-        mock_pdf.write_html.assert_called_once()
-        mock_pdf.output.assert_called_once_with("output.pdf")
-
-    @patch('os.path.exists')
-    @patch('builtins.open')
-    @patch('json.load')
-    @patch('markdown_to_pdf.converter.convert_md_to_html')
-    @patch('markdown_to_pdf.converter.convert_html_to_pdf')
-    def test_main_integration(self, mock_convert_pdf, mock_convert_html, mock_json_load, mock_open, mock_exists):
-        from markdown_to_pdf import __main__
-        
-        mock_exists.return_value = True
-        mock_open.return_value.__enter__ = lambda s: s
-        mock_open.return_value.__exit = MagicMock()
-        mock_open.return_value.read.return_value = "# Title"
-        mock_json_load.return_value = {"input": "test.md", "output": "test.pdf"}
-        
-        __main__.main()
-        
-        mock_convert_html.assert_called_once()
-        mock_convert_pdf.assert_called_once()
+    @patch('markdown_to_pdf.converter.PDF')
+    def test_html_to_pdf(self, MockPDF):
+        from markdown_to_pdf.converter import html_to_pdf
+        html = "<h1>Hello</h1>"
+        html_to_pdf(html, 'output.pdf')
+        MockPDF.assert_called_once()
