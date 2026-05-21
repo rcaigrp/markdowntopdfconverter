@@ -111,3 +111,7 @@ Rewrote the project using fpdf2 and markdown libraries. Fixed the previous typo 
 ## Turn 19 — Manager (2026-05-20 23:54 UTC)
 
 
+
+## Turn 20 — Craft (2026-05-21 00:04 UTC)
+
+

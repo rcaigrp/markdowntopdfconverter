@@ -1,33 +1,34 @@
-import json
-import os
 import sys
-import markdown_to_pdf.converter as converter
+import os
+import json
 
+# Ensure the module's parent directory is on the path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def main():
-    # Resolve paths relative to the project root
-    package_dir = os.path.dirname(os.path.abspath(__file__))
-    project_dir = os.path.dirname(package_dir)
+    project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config_path = os.path.join(project_dir, 'config.json')
-
+    
     if not os.path.exists(config_path):
-        print(f"Config not found at {config_path}")
+        print(f'Config file not found: {config_path}')
         sys.exit(1)
-
+        
     with open(config_path, 'r') as f:
         config = json.load(f)
-
-    input_path = config['input']
-    output_path = config['output']
-
-    if not os.path.exists(input_path):
-        print(f"Input file not found at {input_path}")
+        
+    input_path = config.get('input_path')
+    output_path = config.get('output_path')
+    
+    if not input_path or not output_path:
+        print('Missing input_path or output_path in config')
         sys.exit(1)
-
-    md_text = converter.read_md(input_path)
-    html = converter.md_to_html(md_text)
-    converter.html_to_pdf(html, output_path)
-
+        
+    # Ensure paths are absolute
+    input_path = os.path.abspath(input_path)
+    output_path = os.path.abspath(output_path)
+    
+    from markdown_to_pdf import convert
+    convert.process(input_path, output_path)
 
 if __name__ == '__main__':
     main()
