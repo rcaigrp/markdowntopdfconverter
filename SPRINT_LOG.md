@@ -223,3 +223,7 @@ Implementing the complete MarkdownToPDFConverter project. Created __init__.py, _
 ## Turn 7 — Craft (2026-05-21 03:34 UTC)
 
 Rewriting the project structure to fix import issues and ensure the test mocks align with the code. I created a package `markdown_to_pdf` with `__init__.py` and `__main__.py`, and a `converter.py` module for the FPDF mock target. I also added `config.json`.
+
+## Turn 8 — Manager (2026-05-21 03:47 UTC)
+
+
