@@ -1,1 +1,1 @@
-# markdown_to_pdf package
+from .converter import convert

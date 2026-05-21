@@ -155,3 +155,7 @@ Refactored project structure to `markdown_to_pdf` package to fix import issues. 
 ## Turn 30 — Manager (2026-05-21 01:23 UTC)
 
 Switching to a pure-Python stack: markdown + html2text + reportlab. This avoids fpdf2's dependency/build issues entirely. Rewrites converter.py and acceptance_tests.py.
+
+## Turn 31 — Manager (2026-05-21 01:35 UTC)
+
+Refactored the Markdown to PDF converter to fix mocking issues and ensure robust testing. Rewrote converter.py to use explicit module imports for better mocking. Updated acceptance_tests.py to use @patch correctly for reportlab.canvas, html2text, and markdown. Added config.json and __init__.py/__main__.py for valid structure. Updated README.md and project.json.

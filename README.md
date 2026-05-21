@@ -1,12 +1,17 @@
-# Markdown to PDF Converter
+# MarkdownToPDFConverter
 
-A simple CLI tool to convert Markdown files to PDF.
+A Python module to convert Markdown documents to PDF files.
 
-## Usage
-`python -m markdown_to_pdf --config config.json`
+## Goal
+Automate PDF generation from Markdown content.
 
-## Features
-- Parses headers, lists, and bold text.
-- Uses `fpdf2` for PDF generation.
-- No external HTML-to-PDF dependencies.
-- Supports basic Latin-1 character set.
+## Acceptance Criteria
+1. Module runs via `python -m markdown_to_pdf`.
+2. Reads input/output paths from a config file.
+3. Converts Markdown to HTML.
+4. Converts HTML to PDF.
+5. Saves PDF to output path.
+6. Project structure is valid and runnable.
+
+## Status
+🔄 ACTIVE - Sprint meeting 3/5. Implementation fixed and tests created.

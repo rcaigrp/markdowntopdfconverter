@@ -1,44 +1,34 @@
-from fpdf import FPDF
-import os
+import json
+import markdown
+import html2text
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
-def convert_md_to_pdf(md_path, pdf_path):
-    with open(md_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+def read_config(path='config.json'):
+    with open(path, 'r') as f:
+        return json.load(f)
+
+def md_to_html(md_content):
+    return markdown.markdown(md_content)
+
+def html_to_text(html_content):
+    h = html2text.HTML()
+    h.body_width = 0
+    return h.process_text(html_content).strip()
+
+def create_pdf(text, output_path):
+    c = canvas.Canvas(output_path, pagesize=letter)
+    c.drawString(100, 750, text)
+    c.save()
+
+def convert(input_path, output_path, config_path='config.json'):
+    config = read_config(config_path)
+    md_content = config.get('input', input_path)
     
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Helvetica", size=12)
+    with open(md_content, 'r') as f:
+        md_text = f.read()
+        
+    html = md_to_html(md_text)
+    text = html_to_text(html)
     
-    lines = content.split('\n')
-    for line in lines:
-        line = line.strip()
-        if not line:
-            pdf.ln(5)
-            continue
-            
-        if line.startswith('# '):
-            pdf.set_font("Helvetica", "B", 16)
-            pdf.cell(0, 10, line[2:])
-            pdf.ln(10)
-        elif line.startswith('## '):
-            pdf.set_font("Helvetica", "B", 14)
-            pdf.cell(0, 10, line[3:])
-            pdf.ln(10)
-        elif line.startswith('- '):
-            pdf.set_font("Helvetica", size=12)
-            pdf.cell(0, 10, f"- {line[2:]}")
-            pdf.ln(5)
-        elif line.startswith('* ') or line.startswith('_ '):
-            pdf.set_font("Helvetica", "I", 12)
-            pdf.cell(0, 10, line[2:])
-            pdf.ln(5)
-        elif line.startswith('**') and line.endswith('**'):
-            pdf.set_font("Helvetica", "B", 12)
-            pdf.cell(0, 10, line[2:-2])
-            pdf.ln(5)
-        else:
-            pdf.set_font("Helvetica", size=12)
-            pdf.cell(0, 10, line)
-            pdf.ln(5)
-            
-    pdf.output(pdf_path)
+    create_pdf(text, output_path)
