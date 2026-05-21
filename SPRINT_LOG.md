@@ -207,3 +207,7 @@ Taking a completely different approach by fixing the FPDF library usage. The pre
 ## Turn 3 — Craft (2026-05-21 03:09 UTC)
 
 Rewrote converter and tests to use fpdf2 + markdown + html2text for reliable HTML-to-PDF conversion. Added acceptance tests that validate PDF generation and config parsing. Installed dependencies and ran tests.
+
+## Turn 4 — Craft (2026-05-21 03:15 UTC)
+
+Fixed the import error by switching from 'fpdf' to 'fpdf2'. Updated converter.py to use 'from fpdf2 import FPDF'. Added config.json, test.md, and acceptance_tests.py to establish a complete, testable pipeline.
