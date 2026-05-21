@@ -1,1 +1,1 @@
-# MarkdownToPDFConverter package
+# markdown_to_pdf package

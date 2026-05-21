@@ -1,34 +1,28 @@
-import os
 import json
+import os
 import markdown
+from fpdf import FPDF
 
-def load_config(config_path='config.json'):
-    """Load configuration from JSON file"""
-    with open(config_path, 'r') as f:
+def load_config(config_path: str) -> dict:
+    with open(config_path, "r") as f:
         return json.load(f)
 
-def read_markdown(input_path):
-    """Read markdown content from file"""
-    with open(input_path, 'r') as f:
-        return f.read()
+def markdown_to_html(md_text: str) -> str:
+    return markdown.markdown(md_text)
 
-def markdown_to_html(md_content):
-    """Convert markdown content to HTML"""
-    html = markdown.markdown(md_content)
-    return f"<html><body>{html}</body></html>"
-
-def html_to_pdf(html_content, output_path):
-    """Convert HTML content to PDF using fpdf2"""
-    from fpdf import FPDF
+def html_to_pdf(html_content: str) -> bytes:
     pdf = FPDF()
     pdf.add_page()
-    pdf.add_html(html_content)
-    pdf.output(output_path)
-    return True
+    pdf.html(html_content, x=0, y=0)
+    return pdf.output(dest="S")
 
-def convert_markdown_to_pdf(input_path, output_path):
-    """Main conversion function"""
-    md_content = read_markdown(input_path)
-    html = markdown_to_html(md_content)
-    success = html_to_pdf(html, output_path)
-    return success
+def convert(input_path: str, output_path: str, config_path: str = "config.json"):
+    config = load_config(config_path)
+    with open(input_path, "r") as f:
+        md_text = f.read()
+    
+    html_content = markdown_to_html(md_text)
+    pdf_bytes = html_to_pdf(html_content)
+    
+    with open(output_path, "wb") as f:
+        f.write(pdf_bytes)

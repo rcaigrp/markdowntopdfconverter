@@ -1,22 +1,25 @@
 import sys
 import os
 
-# Add project directory to path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from converter import load_config, convert_markdown_to_pdf
-
 def main():
-    """Main entry point"""
-    config = load_config()
-    input_path = config['input_path']
-    output_path = config['output_path']
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+    config = {}
+    try:
+        with open(config_path, "r") as f:
+            config = __import__("json").load(f)
+    except FileNotFoundError:
+        print(f"Config file not found at {config_path}")
+        sys.exit(1)
     
-    success = convert_markdown_to_pdf(input_path, output_path)
-    if success:
-        print(f"PDF saved to {output_path}")
-    else:
-        print("Conversion failed")
+    input_path = config.get("input")
+    output_path = config.get("output")
+    
+    if not input_path or not output_path:
+        print("Missing input or output path in config.json")
+        sys.exit(1)
+        
+    from markdown_to_pdf import converter
+    converter.convert(input_path, output_path, config_path)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
