@@ -1,10 +1,14 @@
+"""Configuration file handler for markdown to PDF converter."""
 import json
-import os
 
-def load_config(config_path=None):
-    if config_path is None:
-        config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.json')
-    if not os.path.exists(config_path):
-        config_path = 'config.json'
+def load_config(config_path):
+    """Load configuration from JSON file.
+    
+    Args:
+        config_path: Path to the config JSON file
+        
+    Returns:
+        dict: Configuration dictionary with input/output paths
+    """
     with open(config_path, 'r') as f:
         return json.load(f)

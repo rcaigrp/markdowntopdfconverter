@@ -123,3 +123,7 @@ Rewriting converter.py, __main__.py, and acceptance_tests.py from scratch with a
 ## Turn 22 — Craft (2026-05-21 00:16 UTC)
 
 
+
+## Turn 23 — Craft (2026-05-21 00:22 UTC)
+
+Retrying with a different library stack. Previous failure likely due to Pillow compilation in slim container. Switching to reportlab + markdown which has no heavy C dependencies.
