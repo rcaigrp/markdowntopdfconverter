@@ -171,3 +171,7 @@ Retrying with fpdf2 instead of fpdf to fix installation issues. Rewriting conver
 ## Turn 34 — Craft (2026-05-21 02:04 UTC)
 
 Renamed project directory from MarkdownToPDF to markdown_to_pdf to satisfy python -m markdown_to_pdf requirement. Rewrote acceptance_tests.py to reflect new directory structure and fixed test_criterion_6_valid_structure. Implemented converter.py using fpdf2 and markdown libraries. Implemented __main__.py entry point.
+
+## Turn 35 — Craft (2026-05-21 02:12 UTC)
+
+
