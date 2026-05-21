@@ -1,24 +1,19 @@
-import sys
+import json
 import os
 
-# Ensure imports work regardless of execution context
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from . import converter
 
-from converter import read_config, md_to_html, html_to_text, text_to_pdf
 
 def main():
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-    config = read_config(config_path)
-    input_path = config["input"]
-    output_path = config["output"]
-    
-    with open(input_path) as f:
-        md_content = f.read()
-        
-    html = md_to_html(md_content)
-    text = html_to_text(html)
-    text_to_pdf(text, output_path)
-    print(f"PDF generated at {output_path}")
+    """Entry point for python -m markdown_to_pdf."""
+    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    with open(config_path, 'r') as f:
+        config = json.load(f)
 
-if __name__ == "__main__":
+    input_path = config['input_path']
+    output_path = config['output_path']
+
+    converter.convert(input_path, output_path)
+
+if __name__ == '__main__':
     main()

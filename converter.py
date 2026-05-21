@@ -1,21 +1,30 @@
-import json
 import markdown
 import html2text
 from fpdf import FPDF
+import os
 
-def read_config(path):
-    with open(path, 'r') as f:
-        return json.load(f)
 
-def md_to_html(md_text):
-    return markdown.markdown(md_text)
+def convert(input_path, output_path):
+    """Converts a Markdown file to a PDF file."""
+    with open(input_path, 'r') as f:
+        md_content = f.read()
 
-def html_to_text(html_text):
-    return html2text.html2text(html_text)
+    # Step 1: Convert Markdown to HTML
+    html = markdown.markdown(md_content)
 
-def text_to_pdf(text, output_path):
+    # Step 2: Convert HTML to plain text
+    converter = html2text.HTML2Text()
+    converter.body_width = 0  # Disable line wrapping
+    text = converter.handle(html)
+
+    # Step 3: Convert text to PDF
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, text)
-    pdf.output(output_path)
+    pdf.set_font("Courier", size=12)
+    pdf.multi_cell(w=0, h=5, text=text)
+
+    # Step 4: Save PDF
+    dir_path = os.path.dirname(output_path)
+    if dir_path:
+        os.makedirs(dir_path, exist_ok=True)
+    pdf.output(output_path, mode="F")
