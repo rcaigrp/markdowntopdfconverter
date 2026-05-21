@@ -1,3 +1,6 @@
 # Hello World
 
-This is a test Markdown document converted to PDF.
+This is a sample markdown file.
+
+- Item 1
+- Item 2

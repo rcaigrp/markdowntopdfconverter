@@ -14,4 +14,21 @@ Automate PDF generation from Markdown content.
 6. Project structure is valid and runnable.
 
 ## Status
-🔄 ACTIVE - Sprint meeting 3/5. Project files created and tests configured.
+🔄 ACTIVE - Sprint meeting 3/5. Core module and acceptance tests created.
+
+## Completed Work
+- `markdown_to_pdf/__main__.py`: Main pipeline logic.
+- `markdown_to_pdf/__init__.py`: Package init.
+- `config.json`: Input/output paths.
+- `acceptance_tests.py`: 6 test functions covering all criteria.
+
+## Test Results
+- Awaiting pytest run.
+
+## Known Bugs
+- None yet.
+
+## Next Steps
+- Run acceptance tests.
+- Fix any failures.
+- Finalize sprint.
