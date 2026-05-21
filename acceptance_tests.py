@@ -1,27 +1,29 @@
-import unittest
-import json
-import os
-from unittest.mock import patch, mock_open
 import sys
+import os
+import pytest
 
-class TestMarkdownToPDF(unittest.TestCase):
-    @patch('builtins.open', mock_open(read_data='{"input": "input.md", "output": "output.pdf"}'))
-    def test_load_config(self):
-        from markdown_to_pdf.converter import load_config
-        config = load_config()
-        self.assertEqual(config['input'], 'input.md')
-        self.assertEqual(config['output'], 'output.pdf')
+sys.path.insert(0, '/workspace')
 
-    def test_md_to_html(self):
-        from markdown_to_pdf.converter import md_to_html
-        md_text = "# Hello\n- Item"
-        html = md_to_html(md_text)
-        self.assertIn('<h1>Hello</h1>', html)
-        self.assertIn('<li>Item</li>', html)
+from markdown_to_pdf.converter import convert_md_to_pdf
 
-    @patch('markdown_to_pdf.converter.PDF')
-    def test_html_to_pdf(self, MockPDF):
-        from markdown_to_pdf.converter import html_to_pdf
-        html = "<h1>Hello</h1>"
-        html_to_pdf(html, 'output.pdf')
-        MockPDF.assert_called_once()
+@pytest.fixture
+def sample_md(tmp_path):
+    md_path = tmp_path / "test.md"
+    md_path.write_text("# Title\n\nHello World\n\n- Item 1\n\n**Bold**")
+    return md_path
+
+@pytest.fixture
+def pdf_path(tmp_path):
+    return tmp_path / "test.pdf"
+
+def test_conversion_creates_pdf(sample_md, pdf_path):
+    convert_md_to_pdf(str(sample_md), str(pdf_path))
+    assert pdf_path.exists()
+    assert pdf_path.stat().st_size > 100
+
+def test_pdf_contains_text(sample_md, pdf_path):
+    convert_md_to_pdf(str(sample_md), str(pdf_path))
+    with open(pdf_path, 'rb') as f:
+        content = f.read()
+    assert b"Hello World" in content
+    assert b"Title" in content

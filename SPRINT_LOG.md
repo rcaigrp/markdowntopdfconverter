@@ -143,3 +143,7 @@ Rewrote converter.py to use FPDF's HTMLMixin for proper HTML rendering, and crea
 ## Turn 27 — Craft (2026-05-21 01:03 UTC)
 
 
+
+## Turn 28 — Manager (2026-05-21 01:08 UTC)
+
+Rewrote converter to use direct text parsing with fpdf2 instead of markdown-to-HTML pipeline. Added config loader, acceptance tests, and updated README.

@@ -1,19 +1,14 @@
 import sys
-import os
-from markdown_to_pdf.converter import load_config, md_to_html, html_to_pdf
+import argparse
+from markdown_to_pdf.config import load_config
+from markdown_to_pdf.converter import convert_md_to_pdf
 
 def main():
-    config_path = 'config.json'
-    if os.path.exists(config_path):
-        config = load_config(config_path)
-    else:
-        config = {'input': 'input.md', 'output': 'output.pdf'}
-    
-    with open(config['input']) as f:
-        md_text = f.read()
-    
-    html = md_to_html(md_text)
-    html_to_pdf(html, config['output'])
+    parser = argparse.ArgumentParser(description='Convert Markdown to PDF')
+    parser.add_argument('--config', default='config.json', help='Path to config file')
+    args = parser.parse_args()
+    config = load_config(args.config)
+    convert_md_to_pdf(config['input'], config['output'])
 
 if __name__ == '__main__':
     main()
