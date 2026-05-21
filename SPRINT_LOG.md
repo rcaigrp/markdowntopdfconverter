@@ -151,3 +151,7 @@ Rewrote converter to use direct text parsing with fpdf2 instead of markdown-to-H
 ## Turn 29 — Manager (2026-05-21 01:12 UTC)
 
 Refactored project structure to `markdown_to_pdf` package to fix import issues. Created `__main__.py`, `converter.py`, `config.json`, and `acceptance_tests.py`. Updated README.md and project.json. Tests mock FPDF and markdown to avoid system dependencies.
+
+## Turn 30 — Manager (2026-05-21 01:23 UTC)
+
+Switching to a pure-Python stack: markdown + html2text + reportlab. This avoids fpdf2's dependency/build issues entirely. Rewrites converter.py and acceptance_tests.py.
