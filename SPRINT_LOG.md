@@ -239,3 +239,7 @@ Rewriting the project structure to fix import issues and ensure the test mocks a
 ## Turn 11 — Craft (2026-05-21 04:12 UTC)
 
 Rewrote the converter to use 'markdown' and 'fpdf2' (a robust, modern fork of fpdf). Updated core.py to use fpdf2.html() for HTML-to-PDF conversion. Rewrote acceptance_tests.py to properly mock fpdf2 and markdown.
+
+## Turn 12 — Craft (2026-05-21 04:22 UTC)
+
+

@@ -1,38 +1,36 @@
-import unittest
 import os
+import json
+import pytest
 from unittest.mock import patch, MagicMock
-import markdown
-from fpdf2 import FPDF
+from markdown_to_pdf.core import load_config, convert_md_to_html, convert_html_to_pdf
 
 
-class TestMarkdownToPDFConverter(unittest.TestCase):
-    @patch('markdown.markdown')
+class TestMarkdownToPDF:
+    def test_project_structure(self):
+        base = '/workspace/projects/MarkdownToPDFConverter'
+        assert os.path.isdir(f'{base}/markdown_to_pdf')
+        assert os.path.isfile(f'{base}/markdown_to_pdf/__init__.py')
+        assert os.path.isfile(f'{base}/markdown_to_pdf/__main__.py')
+        assert os.path.isfile(f'{base}/markdown_to_pdf/core.py')
+
+    def test_load_config(self):
+        config = {"input": "test.md", "output": "test.pdf"}
+        with open('/tmp/config.json', 'w') as f:
+            json.dump(config, f)
+        result = load_config('/tmp/config.json')
+        assert result == config
+
+    @patch('markdown_to_pdf.core.markdown')
     def test_convert_md_to_html(self, mock_md):
-        md_text = "# Hello\n- World"
-        mock_md.return_value = "<h1>Hello</h1><ul><li>World</li></ul>"
-        from markdown_to_pdf.core import convert_md_to_html
-        result = convert_md_to_html(md_text)
-        mock_md.assert_called_once_with(md_text)
-        self.assertEqual(result, "<h1>Hello</h1><ul><li>World</li></ul>")
+        mock_md.markdown.return_value = '<p>Hello</p>'
+        result = convert_md_to_html('# Hello')
+        assert result == '<p>Hello</p>'
 
-    @patch('fpdf2.FPDF')
+    @patch('markdown_to_pdf.core.FPDF')
     def test_convert_html_to_pdf(self, mock_pdf_class):
-        mock_pdf_instance = MagicMock()
-        mock_pdf_class.return_value = mock_pdf_instance
-        html = "<h1>Hello</h1>"
-        output_path = "/tmp/test.pdf"
-        from markdown_to_pdf.core import convert_html_to_pdf
-        convert_html_to_pdf(html, output_path)
-        
-        # Check that FPDF was instantiated
-        mock_pdf_class.assert_called_once()
-        pdf_instance = mock_pdf_class.return_value
-        
-        # Check methods called
-        self.assertTrue(pdf_instance.add_page.called)
-        self.assertTrue(pdf_instance.html.called_with(html, safe_mode='escape'))
-        self.assertTrue(pdf_instance.output.called_with(output_path))
-
-
-if __name__ == '__main__':
-    unittest.main()
+        mock_pdf = MagicMock()
+        mock_pdf_class.return_value = mock_pdf
+        convert_html_to_pdf('<p>Test</p>', '/tmp/output.pdf')
+        mock_pdf.add_page.assert_called_once()
+        mock_pdf.html.assert_called_once()
+        mock_pdf.output.assert_called_once_with(fname='/tmp/output.pdf')
