@@ -147,3 +147,7 @@ Rewrote converter.py to use FPDF's HTMLMixin for proper HTML rendering, and crea
 ## Turn 28 — Manager (2026-05-21 01:08 UTC)
 
 Rewrote converter to use direct text parsing with fpdf2 instead of markdown-to-HTML pipeline. Added config loader, acceptance tests, and updated README.
+
+## Turn 29 — Manager (2026-05-21 01:12 UTC)
+
+Refactored project structure to `markdown_to_pdf` package to fix import issues. Created `__main__.py`, `converter.py`, `config.json`, and `acceptance_tests.py`. Updated README.md and project.json. Tests mock FPDF and markdown to avoid system dependencies.
