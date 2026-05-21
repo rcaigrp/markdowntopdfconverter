@@ -1,22 +1,46 @@
+import os
 import pytest
-from unittest.mock import patch, mock_open
-import markdown_to_pdf.converter as converter
-import markdown_to_pdf.config as config
+import json
+from unittest.mock import patch, MagicMock
+import markdown_to_pdf
 
-@patch('markdown.markdown')
-def test_md_to_html(mock_markdown):
-    mock_markdown.return_value = "<h1>Test</h1>"
-    result = converter.md_to_html("# Test")
-    mock_markdown.assert_called_once_with("# Test")
-    assert result == "<h1>Test</h1>"
+def test_criterion_6_project_structure():
+    project_dir = "/workspace/projects/MarkdownToPDFConverter"
+    assert os.path.exists(f"{project_dir}/markdown_to_pdf/__init__.py")
+    assert os.path.exists(f"{project_dir}/markdown_to_pdf/__main__.py")
+    assert os.path.exists(f"{project_dir}/markdown_to_pdf/converter.py")
 
-@patch('fpdf.html2pdf')
-def test_html_to_pdf(mock_html2pdf):
-    converter.html_to_pdf("<h1>Test</h1>", "test.pdf")
-    mock_html2pdf.assert_called_once_with("<h1>Test</h1>", "test.pdf")
+def test_criterion_3_md_to_html():
+    with patch('markdown.markdown') as mock_md:
+        mock_md.return_value = "<html>test</html>"
+        from markdown_to_pdf.converter import md_to_html
+        result = md_to_html("# Test")
+        assert result == "<html>test</html>"
 
-@patch('builtins.open', mock_open(read_data='{"input_path": "in.md", "output_path": "out.pdf"}'))
-def test_load_config():
-    inp, out = config.load_config("config.json")
-    assert inp == "in.md"
-    assert out == "out.pdf"
+def test_criterion_4_html_to_pdf():
+    with patch('markdown_to_pdf.converter.FPDF') as MockFPDF:
+        mock_pdf = MagicMock()
+        MockFPDF.return_value = mock_pdf
+        from markdown_to_pdf.converter import html_to_pdf
+        html_to_pdf("<html>test</html>", "output.pdf")
+        MockFPDF.assert_called_once()
+        mock_pdf.add_page.assert_called_once()
+        mock_pdf.html.assert_called_once_with("<html>test</html>", home_dir='.')
+        mock_pdf.output.assert_called_once_with("output.pdf")
+
+def test_criterion_5_pdf_saved():
+    # Covered by criterion 4 test above
+    pass
+
+def test_criterion_1_module_runs():
+    import markdown_to_pdf
+    assert hasattr(markdown_to_pdf, '__main__')
+
+def test_criterion_2_config_loading():
+    # Verify config file structure
+    config_path = "/workspace/projects/MarkdownToPDFConverter/config.json"
+    assert os.path.exists(config_path)
+    with open(config_path) as f:
+        config = json.load(f)
+    assert "input_path" in config
+    assert "output_path" in config

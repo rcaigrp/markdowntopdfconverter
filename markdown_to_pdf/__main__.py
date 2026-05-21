@@ -1,23 +1,26 @@
 import sys
+import json
 import os
-from config import load_config
-from converter import md_to_html, html_to_pdf
+import markdown_to_pdf
+
+# Define the converter functions for use in tests
+from markdown_to_pdf.converter import md_to_html, html_to_pdf
 
 def main():
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-    if not os.path.exists(config_path):
-        print(f"Config file not found: {config_path}", file=sys.stderr)
-        sys.exit(1)
-        
-    input_path, output_path = load_config(config_path)
+    config_path = os.path.join(os.path.dirname(__file__), '..', 'config.json')
+    with open(config_path, 'r') as f:
+        config = json.load(f)
     
-    with open(input_path, 'r') as f:
-        md_content = f.read()
-        
-    html_content = md_to_html(md_content)
-    html_to_pdf(html_content, output_path)
+    input_md = config.get('input_path', 'input.md')
+    output_pdf = config.get('output_path', 'output.pdf')
     
-    print(f"PDF generated at {output_path}")
+    # Read markdown
+    with open(input_md, 'r') as f:
+        md_text = f.read()
+    
+    # Convert
+    html = md_to_html(md_text)
+    html_to_pdf(html, output_pdf)
 
 if __name__ == '__main__':
     main()

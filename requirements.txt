@@ -1,4 +1,2 @@
+fpdf2
 markdown
-reportlab
-html2text
-defusedxml
