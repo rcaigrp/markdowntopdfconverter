@@ -115,3 +115,7 @@ Rewrote the project using fpdf2 and markdown libraries. Fixed the previous typo 
 ## Turn 20 — Craft (2026-05-21 00:04 UTC)
 
 
+
+## Turn 21 — Craft (2026-05-21 00:08 UTC)
+
+Rewriting converter.py, __main__.py, and acceptance_tests.py from scratch with a working implementation and proper mocking strategy
