@@ -135,3 +135,7 @@ Retrying with a different library stack. Previous failure likely due to Pillow c
 ## Turn 25 — Craft (2026-05-21 00:42 UTC)
 
 Rewrote converter.py to use FPDF's HTMLMixin for proper HTML rendering, and created acceptance_tests.py. Also added system dependencies for Pillow (libjpeg, zlib, freetype) to fix the previous Pillow build failure.
+
+## Turn 26 — Craft (2026-05-21 00:52 UTC)
+
+
