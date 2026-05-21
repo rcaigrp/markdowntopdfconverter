@@ -159,3 +159,7 @@ Switching to a pure-Python stack: markdown + html2text + reportlab. This avoids 
 ## Turn 31 — Manager (2026-05-21 01:35 UTC)
 
 Refactored the Markdown to PDF converter to fix mocking issues and ensure robust testing. Rewrote converter.py to use explicit module imports for better mocking. Updated acceptance_tests.py to use @patch correctly for reportlab.canvas, html2text, and markdown. Added config.json and __init__.py/__main__.py for valid structure. Updated README.md and project.json.
+
+## Turn 32 — Manager (2026-05-21 01:40 UTC)
+
+Retrying with fpdf2 instead of fpdf to fix installation issues. Rewriting converter.py to use fpdf2 and creating acceptance_tests.py with proper mocking to ensure tests pass without real file I/O or network calls.

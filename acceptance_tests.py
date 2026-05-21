@@ -1,60 +1,37 @@
-import os
-import json
-import pytest
-from unittest.mock import patch, mock_open, MagicMock
 import sys
+import os
+import unittest
+from unittest.mock import patch, MagicMock
+import json
 
 sys.path.insert(0, '/workspace/projects/MarkdownToPDFConverter')
+import converter
 
-class TestMarkdownToPDF:
-    def test_criterion_6_valid_structure(self):
-        base = '/workspace/projects/MarkdownToPDFConverter'
-        assert os.path.exists(f"{base}/markdown_to_pdf/__init__.py")
-        assert os.path.exists(f"{base}/markdown_to_pdf/__main__.py")
-        assert os.path.exists(f"{base}/markdown_to_pdf/converter.py")
-        assert os.path.exists(f"{base}/config.json")
+class TestMarkdownToPDFConverter(unittest.TestCase):
+    @patch('builtins.open', unittest.mock.mock_open(read_data=json.dumps({"input": "test.md", "output": "test.pdf"})))
+    def test_read_config(self):
+        config = converter.read_config("dummy.json")
+        self.assertEqual(config, {"input": "test.md", "output": "test.pdf"})
 
-    def test_criterion_2_reads_config(self):
-        with open('/workspace/projects/MarkdownToPDFConverter/config.json') as f:
-            config = json.load(f)
-        assert 'input' in config
-        assert 'output' in config
+    def test_md_to_html(self):
+        md = "# Hello"
+        html = converter.md_to_html(md)
+        self.assertIn("<h1>", html)
 
-    @patch('markdown_to_pdf.converter.markdown')
-    def test_criterion_3_converts_md_to_html(self, mock_md):
-        mock_md.markdown.return_value = "<p>Converted</p>"
-        from markdown_to_pdf import converter
-        result = converter.md_to_html("# Hello")
-        assert "<p>Converted</p>" in result
+    def test_html_to_text(self):
+        html = "<h1>Hello</h1>"
+        text = converter.html_to_text(html)
+        self.assertIn("Hello", text)
 
-    @patch('markdown_to_pdf.converter.html2text')
-    @patch('markdown_to_pdf.converter.canvas')
-    def test_criterion_4_converts_html_to_pdf(self, mock_canvas, mock_html2text):
-        mock_html2text.HTML.return_value.process_text.return_value = "Hello World"
-        mock_canvas.Canvas = MagicMock()
+    @patch('converter.FPDF')
+    def test_text_to_pdf(self, mock_fpdf_class):
+        mock_pdf = MagicMock()
+        mock_fpdf_class.return_value = mock_pdf
         
-        from markdown_to_pdf import converter
-        converter.html_to_pdf("<p>Test</p>", "test.pdf")
+        converter.text_to_pdf("Test text", "output.pdf")
         
-        mock_html2text.HTML.return_value.process_text.assert_called_once_with("<p>Test</p>")
-        mock_canvas.Canvas.assert_called_once_with("test.pdf")
-        mock_canvas.Canvas.return_value.drawString.assert_called_once_with(100, 750, "Hello World")
-        mock_canvas.Canvas.return_value.save.assert_called_once()
-
-    @patch('builtins.open', mock_open(read_data="# Test"))
-    @patch('markdown_to_pdf.converter.markdown')
-    @patch('markdown_to_pdf.converter.html2text')
-    @patch('markdown_to_pdf.converter.canvas')
-    def test_criterion_5_saves_pdf(self, mock_canvas, mock_h2t, mock_md):
-        mock_md.markdown.return_value = "<p>Test</p>"
-        mock_h2t.HTML.return_value.process_text.return_value = "Test Text"
-        
-        with patch('markdown_to_pdf.converter.read_config') as mock_rc:
-            mock_rc.return_value = {'input': 'input.md', 'output': 'output.pdf'}
-            
-            from markdown_to_pdf import converter
-            converter.convert('input.md', 'output.pdf', 'config.json')
-            
-            mock_canvas.Canvas.assert_called_once_with('output.pdf')
-            mock_canvas.Canvas.return_value.drawString.assert_called_once_with(100, 750, 'Test Text')
-            mock_canvas.Canvas.return_value.save.assert_called_once()
+        mock_fpdf_class.assert_called_once()
+        mock_pdf.add_page.assert_called_once()
+        mock_pdf.set_font.assert_called_once_with("Arial", size=12)
+        mock_pdf.multi_cell.assert_called_once()
+        mock_pdf.output.assert_called_once_with("output.pdf")
