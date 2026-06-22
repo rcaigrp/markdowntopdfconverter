@@ -1,5 +1,5 @@
 {
-  "goal": "Build a CLI tool to convert Markdown to PDF using Python.",
+  "goal": "Build a CLI tool to convert Markdown to PDF using Python. The tool must read a config.json file, validate it, auto-install Tesseract if missing, and convert Markdown to PDF using reportlab.",
   "acceptance_criteria": [
     "Config validation passes and throws clear error messages if invalid.",
     "Tesseract auto-installs if not found.",
