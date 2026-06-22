@@ -380,3 +380,7 @@ Resuming 'MarkdownToPDFConverter' project by activating it and extending budget 
 ## Turn 20 — Manager (2026-06-22 23:37 UTC)
 
 Resuming 'MarkdownToPDFConverter' project by updating project.json status to 'active' and adding 2 meetings to the budget.
+
+## Turn 21 — Manager (2026-06-22 23:38 UTC)
+
+Resuming 'MarkdownToPDFConverter' project by updating project.json and adding 2 meetings to budget.
