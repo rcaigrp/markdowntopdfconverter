@@ -1,34 +1,30 @@
 # MarkdownToPDFConverter
 
-A Python module to convert Markdown documents to PDF files.
+A simple Python CLI tool to convert Markdown documents to PDF files using reportlab.
 
-## Goal
-Automate PDF generation from Markdown content.
+## Installation
 
-## Acceptance Criteria
-1. Module runs via `python -m markdown_to_pdf`.
-2. Reads input/output paths from a config file.
-3. Converts Markdown to HTML.
-4. Converts HTML to PDF.
-5. Saves PDF to output path.
-6. Project structure is valid and runnable.
+```bash
+pip install reportlab
+```
 
-## Status
-🔄 ACTIVE - Sprint meeting 3/5. Core module and acceptance tests created.
+## Usage
 
-## Completed Work
-- `markdown_to_pdf/__main__.py`: Main pipeline logic.
-- `markdown_to_pdf/__init__.py`: Package init.
-- `config.json`: Input/output paths.
-- `acceptance_tests.py`: 6 test functions covering all criteria.
+1. Create a `config.json` file with your input and output paths:
+```json
+{
+  "input_path": "input.md",
+  "output_path": "output.pdf"
+}
+```
 
-## Test Results
-- Awaiting pytest run.
+2. Create a Markdown file `input.md`.
 
-## Known Bugs
-- None yet.
+3. Run the tool:
+```bash
+python -m markdown_to_pdf
+```
 
-## Next Steps
-- Run acceptance tests.
-- Fix any failures.
-- Finalize sprint.
+## Configuration
+
+- `config.json`: Defines input and output file paths.

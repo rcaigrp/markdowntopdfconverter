@@ -300,3 +300,7 @@ Rewrote the entire project structure and tests to ensure robustness. Created `ma
 ## Turn 16 — Manager (2026-05-21 04:49 UTC)
 
 Created acceptance_tests.py to cover all 6 acceptance criteria. Added proper sys.path handling and mocking to avoid font/runtime issues in isolated containers. Updated README.md with test results and next steps. Running tests now.
+
+## Turn 17 — Craft (2026-05-21 04:58 UTC)
+
+

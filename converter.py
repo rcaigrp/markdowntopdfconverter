@@ -1,20 +1,32 @@
 import markdown
-import re
+import json
+import os
 from fpdf import FPDF
 
-def md_to_html(md_text: str) -> str:
-    return markdown.markdown(md_text)
 
-def html_to_pdf(html: str, output_path: str):
+def convert_markdown_to_html(markdown_text):
+    """Convert Markdown text to HTML."""
+    return markdown.markdown(markdown_text)
+
+
+def convert_html_to_pdf(html_text, output_path):
+    """Convert HTML text to PDF and save to output_path."""
     pdf = FPDF()
     pdf.add_page()
-    text = re.sub('<[^<]+>', '', html)
     pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, text)
-    pdf.output(output_path, 'F')
+    pdf.html(html_text)
+    pdf.output(output_path)
 
-def convert_md_to_pdf(input_path: str, output_path: str):
+
+def load_config(config_path):
+    """Load configuration from JSON file."""
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
+
+def process(input_path, output_path):
+    """Main processing function: read markdown, convert to PDF."""
     with open(input_path, 'r') as f:
-        md_text = f.read()
-    html = md_to_html(md_text)
-    html_to_pdf(html, output_path)
+        markdown_text = f.read()
+    html_text = convert_markdown_to_html(markdown_text)
+    convert_html_to_pdf(html_text, output_path)
