@@ -308,3 +308,7 @@ Created acceptance_tests.py to cover all 6 acceptance criteria. Added proper sys
 ## Turn 2 — Manager (2026-06-22 23:24 UTC)
 
 Resuming 'MarkdownToPDFConverter' project by updating project.json status to 'active' and adding 2 meetings to budget.
+
+## Turn 3 — Manager (2026-06-22 23:24 UTC)
+
+Resuming 'MarkdownToPDFConverter' project by updating project.json to 'active' and adding 2 meetings to budget.
