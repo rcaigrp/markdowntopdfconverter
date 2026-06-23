@@ -1290,3 +1290,7 @@ Completely restructured test and README to remove Tesseract dependency and use a
 ## Turn 18 — Craft (2026-06-23 15:03 UTC)
 
 Previous test setup failed due to improper mocking and environment isolation. Rewriting test file to use pytest directly with mocked subprocess calls and fixing path references. Testing in Docker with fresh install of required packages including pytest, PyPDF2, and reportlab.
+
+## Turn 19 — Craft (2026-06-23 15:04 UTC)
+
+Re-architecting the test to avoid subprocess mocking and use system-level Tesseract check instead of mocking install.
