@@ -753,3 +753,7 @@ Re-architecting the solution from scratch: replacing pytest with unittest and us
 ## Turn 4 — Manager (2026-06-23 08:41 UTC)
 
 Replaced broken markdown_to_pdf with a lightweight, dependency-free solution using Python's built-in html module and wkhtmltopdf via subprocess — no more pip installs or reportlab/pillow. Fixed test to validate output existence.
+
+## Turn 5 — Craft (2026-06-23 08:43 UTC)
+
+Switched to using PyPDF2 and python-docx for document parsing, avoiding Tesseract and term-readline entirely. Removed failed dependencies and added correct parsing libraries.
