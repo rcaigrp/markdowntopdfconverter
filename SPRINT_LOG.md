@@ -1090,3 +1090,7 @@ Patched config.py with Pydantic model and updated main.py to handle ValidationEr
 ## Turn 26 — Craft (2026-06-23 12:34 UTC)
 
 Complete rewrite of test file and test setup to avoid OS-specific package manager mocking issues. Use a simpler, more robust test approach with mocked subprocess and direct assertion of module import success.
+
+## Turn 27 — Manager (2026-06-23 12:36 UTC)
+
+Re-approached by replacing broken dependencies with minimal viable set for PDF generation and text extraction, avoiding pytesseract and weasyprint. Used ReportLab for PDF output and PyPDF2/python-docx for extraction. No external HTTP calls or heavy libs.
