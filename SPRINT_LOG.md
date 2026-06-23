@@ -1116,3 +1116,7 @@ Complete rewrite of the project structure to fix the failed test. Replaced PyPDF
 ## Turn 30 — Craft (2026-06-23 12:53 UTC)
 
 Fixed Tesseract auto-install logic in convert.py and enhanced config validation to throw clear, formatted errors using Pydantic.
+
+## Turn 31 — Manager (2026-06-23 12:55 UTC)
+
+Replaced markdown2pdf with weasyprint for PDF generation — it’s mature, supports HTML-to-PDF, and doesn’t require markdown2 or Tesseract. Fixed README with correct dependencies and usage. Tests rewritten to use weasyprint only.
