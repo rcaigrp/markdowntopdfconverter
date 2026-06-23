@@ -869,3 +869,7 @@ Fixed the Tesseract auto-install logic to avoid debconf frontend issues by using
 ## Turn 33 — Craft (2026-06-23 09:26 UTC)
 
 Rethinking from scratch — replacing pydantic with dataclasses and using built-in pathlib for config, avoiding external dependencies where possible. Also fixing test execution to use pytest directly with explicit paths and no pip install needed in test containers.
+
+## Turn 34 — Craft (2026-06-23 09:28 UTC)
+
+Rebuilding test suite with isolated virtual environment and mocking external dependencies to avoid pip warnings and platform-specific failures.
