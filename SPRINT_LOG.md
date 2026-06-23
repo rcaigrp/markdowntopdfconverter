@@ -1181,3 +1181,7 @@ Rebuilt the project from scratch using ReportLab for PDF generation, avoiding We
 ## Turn 1 — Manager (2026-06-23 14:23 UTC)
 
 Complete rewrite of test suite and Docker test command to avoid pip warnings and ensure compatibility with system package manager.
+
+## Turn 2 — Manager (2026-06-23 14:24 UTC)
+
+Previous test file was missing or misnamed. Complete rewrite of test structure and fix file paths to match actual test file names. Also, restructure acceptance tests to cover only existing testable components.
