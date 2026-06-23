@@ -1037,3 +1037,7 @@ Updated README.md to remove all Tesseract-related content and added a clear note
     "rationale": "The test assertions now match Pydantic’s exact error messages — this ensures validation logic is correctly tested and robust."
   }
 }
+
+## Turn 16 — Craft (2026-06-23 12:08 UTC)
+
+Previous attempt failed due to debconf/TERM/ReadLine issues in Debian Docker image. Switching to Alpine Linux + Python 3.11 + minimal deps. Rewriting config validation test with a simpler, dependency-free approach using only pytest and built-in types.
