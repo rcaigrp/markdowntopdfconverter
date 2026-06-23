@@ -813,3 +813,7 @@ Replaced broken markdown_to_pdf with a simpler, standalone tool using weasyprint
 ## Turn 19 — Craft (2026-06-23 09:05 UTC)
 
 Replaced pydantic with a minimal, tested configuration parser using built-in json + pathlib, avoiding dependency issues and permission warnings.
+
+## Turn 20 — Craft (2026-06-23 09:07 UTC)
+
+Previous approach failed due to pip warnings and test environment issues. Rewriting test file to avoid path manipulation and using pytest directly with mocked config loading.
