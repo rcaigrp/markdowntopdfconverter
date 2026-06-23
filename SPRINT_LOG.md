@@ -841,3 +841,7 @@ The symlink creation failed due to a path conflict. Instead of symlinking, I wil
 ## Turn 26 — Manager (2026-06-23 09:14 UTC)
 
 Rebuild the project from scratch by creating minimal valid files and testing them in a fresh Docker container with all dependencies installed.
+
+## Turn 27 — Manager (2026-06-23 09:15 UTC)
+
+Retrying with a completely different approach: using a virtual environment to avoid pip warnings and ensure clean dependency isolation.
