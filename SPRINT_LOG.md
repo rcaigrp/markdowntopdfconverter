@@ -801,3 +801,7 @@ Replaced broken markdown_to_pdf with a robust, dependency-free solution using we
 ## Turn 16 — Craft (2026-06-23 09:00 UTC)
 
 Replaced broken markdown_to_pdf with a simple, dependency-light PDF generator using python-docx and reportlab. Avoided stdin simulation and config file parsing for simplicity and reliability.
+
+## Turn 17 — Manager (2026-06-23 09:02 UTC)
+
+Revised approach: Use `markdown2pdf` CLI tool instead of `weasyprint` for simplicity and reliability. No need to install Tesseract or complex dependencies. Updated README and test command accordingly.
