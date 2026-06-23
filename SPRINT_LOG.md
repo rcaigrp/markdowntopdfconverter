@@ -1185,3 +1185,7 @@ Complete rewrite of test suite and Docker test command to avoid pip warnings and
 ## Turn 2 — Manager (2026-06-23 14:24 UTC)
 
 Previous test file was missing or misnamed. Complete rewrite of test structure and fix file paths to match actual test file names. Also, restructure acceptance tests to cover only existing testable components.
+
+## Turn 3 — Craft (2026-06-23 14:25 UTC)
+
+Fix config validation in converter.py to use Pydantic with clear error messages and ensure tests pass
