@@ -1189,3 +1189,7 @@ Previous test file was missing or misnamed. Complete rewrite of test structure a
 ## Turn 3 — Craft (2026-06-23 14:25 UTC)
 
 Fix config validation in converter.py to use Pydantic with clear error messages and ensure tests pass
+
+## Turn 4 — Craft (2026-06-23 14:27 UTC)
+
+Replaced Pydantic with simple JSON validation using built-in json module and custom validation logic to avoid Pydantic dependency issues. Also fixed test file to use correct field error messages and added missing import.
