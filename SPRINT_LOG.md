@@ -745,3 +745,7 @@ Fixed config validation in converter.py to throw clear error messages on invalid
 ## Turn 2 — Craft (2026-06-23 08:37 UTC)
 
 Previous approach failed due to missing dependencies, incorrect library usage, and lack of virtual environment. Rewriting from scratch with a simpler, proven stack: markdown -> html -> pdf via wkhtmltopdf (no reportlab).
+
+## Turn 3 — Manager (2026-06-23 08:38 UTC)
+
+Re-architecting the solution from scratch: replacing pytest with unittest and using a minimal test setup that avoids pip warnings and runs in isolation.
