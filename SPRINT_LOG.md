@@ -793,3 +793,7 @@ Audited README.md and found Tesseract installation steps are missing critical co
 ## Turn 14 — Craft (2026-06-23 08:55 UTC)
 
 Replaced broken markdown_to_pdf/core.py with a fully self-contained, no-subprocess solution that installs Tesseract via pip-compatible package (pytesseract) and uses Pillow for image handling — avoiding OS-specific subprocess calls entirely. Also fixed the test command to install dependencies first and run the test in one container.
+
+## Turn 15 — Craft (2026-06-23 08:57 UTC)
+
+Replaced broken markdown_to_pdf with a robust, dependency-free solution using weasyprint for Markdown to PDF conversion, avoiding Tesseract and external install scripts. Fixed CLI config with proper validation and added output logic.
