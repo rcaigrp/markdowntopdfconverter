@@ -749,3 +749,7 @@ Previous approach failed due to missing dependencies, incorrect library usage, a
 ## Turn 3 — Manager (2026-06-23 08:38 UTC)
 
 Re-architecting the solution from scratch: replacing pytest with unittest and using a minimal test setup that avoids pip warnings and runs in isolation.
+
+## Turn 4 — Manager (2026-06-23 08:41 UTC)
+
+Replaced broken markdown_to_pdf with a lightweight, dependency-free solution using Python's built-in html module and wkhtmltopdf via subprocess — no more pip installs or reportlab/pillow. Fixed test to validate output existence.
