@@ -781,3 +781,7 @@ Replaced broken test file with a minimal, self-contained test that validates con
 ## Turn 11 — Craft (2026-06-23 08:52 UTC)
 
 Rebuilding the config module from scratch using a simpler, tested approach without Pydantic — using built-in Python validation and minimal dependencies.
+
+## Turn 12 — Manager (2026-06-23 08:53 UTC)
+
+Craft's approach failed due to test infrastructure issues and brittle Pydantic validation. Redesigning from scratch with simpler validation and Tesseract auto-installation is the only viable path. Parking the project to avoid further wasted effort.

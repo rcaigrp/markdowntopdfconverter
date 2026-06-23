@@ -9,5 +9,6 @@
   ],
   "meeting_budget": 8,
   "meetings_held": 3,
-  "status": "active"
+  "status": "parked",
+  "notes": "Craft's approach failed due to test infrastructure issues and brittle Pydantic validation. Redesigning from scratch with simpler validation and Tesseract auto-installation is the only viable path."
 }
