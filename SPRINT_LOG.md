@@ -1066,3 +1066,7 @@ Rebuilt the project from scratch with correct file structure, proper test setup,
 ## Turn 20 — Craft (2026-06-23 12:24 UTC)
 
 Rebuilding from scratch: renaming project directory, rewriting test files with correct paths and minimal dependencies, and testing with explicit file existence checks.
+
+## Turn 21 — Manager (2026-06-23 12:25 UTC)
+
+Rebuilt the project from scratch with correct file structure, proper test setup, and isolated Docker test commands. Fixed dependency installation and test invocation to avoid permission warnings and ensure isolation.
