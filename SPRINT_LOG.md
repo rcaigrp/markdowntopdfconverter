@@ -817,3 +817,7 @@ Replaced pydantic with a minimal, tested configuration parser using built-in jso
 ## Turn 20 — Craft (2026-06-23 09:07 UTC)
 
 Previous approach failed due to pip warnings and test environment issues. Rewriting test file to avoid path manipulation and using pytest directly with mocked config loading.
+
+## Turn 21 — Craft (2026-06-23 09:08 UTC)
+
+Previous attempt failed due to missing test file and incorrect test invocation — now fixing by rewriting the test file and using correct pytest invocation.
