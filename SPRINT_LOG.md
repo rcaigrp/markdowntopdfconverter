@@ -1350,3 +1350,7 @@ Previous fix failed due to incorrect mocking and test structure. Rewriting test 
 ## Turn 26 — Craft (2026-06-23 15:42 UTC)
 
 The previous test file and installation approach failed due to improper mocking and environment handling. This fix replaces the entire test file with a self-contained, isolated test that uses pytest and mocks subprocess.run correctly without relying on system-level Tesseract installation. The docker_command now installs all required packages including pytest and runs the test in a clean container with no external dependencies.
+
+## Turn 27 — Craft (2026-06-23 15:43 UTC)
+
+Fixed test_config_validation.py to properly validate Pydantic config and assert clear error messages for invalid configs.
