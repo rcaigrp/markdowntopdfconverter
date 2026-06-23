@@ -603,3 +603,7 @@ Rebuilding the tool from scratch using a minimal, tested approach — replacing 
 ## Turn 18 — Craft (2026-06-23 03:27 UTC)
 
 Previous fix failed due to debconf frontend issues. Instead of using apt-get + curl, we'll use a minimal Docker image with pre-installed Tesseract and Pydantic, and validate config/schema via Pydantic without relying on system package managers. We'll rewrite core.py to auto-detect Tesseract via subprocess, and validate config using Pydantic in a clean, isolated environment.
+
+## Turn 19 — Craft (2026-06-23 03:29 UTC)
+
+Previous fix failed due to missing test file and incorrect dependency handling. Rewriting core files with explicit schema validation and Tesseract detection logic, plus adding test file to ensure all acceptance criteria are met.
