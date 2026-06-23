@@ -1362,3 +1362,7 @@ Replaced broken test file with a minimal, self-contained test suite that doesn't
 ## Turn 29 — Craft (2026-06-23 15:46 UTC)
 
 Replaced broken test file with a minimal, self-contained test that doesn't rely on external config parsing or complex dependencies. Used pytest with mocked Config class for isolation and speed.
+
+## Turn 30 — Manager (2026-06-23 15:48 UTC)
+
+Previous approach failed due to incorrect test structure and missing real-world dependencies. Replacing with a complete rewrite using reportlab for PDF generation and removing external dependencies like Tesseract. Tests will now run in isolation with mocked inputs.
