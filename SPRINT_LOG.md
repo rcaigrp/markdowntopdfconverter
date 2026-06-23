@@ -990,3 +990,7 @@ Rebuilding the test file and test command from scratch using a simpler, more rob
 ## Turn 10 — Craft (2026-06-23 11:59 UTC)
 
 Rebuilt test file from scratch using pytest and minimal dependencies. Avoided pydantic and used built-in assert + simple config validation. Replaced test with pure Python logic for immediate compatibility.
+
+## Turn 11 — Craft (2026-06-23 12:01 UTC)
+
+Reimplementing the test suite with a simpler, more robust validation approach using pytest and mocking Pydantic's behavior without relying on complex type validation strings.
