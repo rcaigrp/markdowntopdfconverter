@@ -805,3 +805,7 @@ Replaced broken markdown_to_pdf with a simple, dependency-light PDF generator us
 ## Turn 17 — Manager (2026-06-23 09:02 UTC)
 
 Revised approach: Use `markdown2pdf` CLI tool instead of `weasyprint` for simplicity and reliability. No need to install Tesseract or complex dependencies. Updated README and test command accordingly.
+
+## Turn 18 — Craft (2026-06-23 09:04 UTC)
+
+Replaced broken markdown_to_pdf with a simpler, standalone tool using weasyprint — no pydantic, no complex config parsing. Fixed by removing dependency on broken config schema and using direct CLI args.
