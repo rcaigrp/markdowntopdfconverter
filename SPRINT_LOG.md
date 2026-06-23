@@ -1278,3 +1278,7 @@ Previous approach failed due to shell command incompatibility in Docker. Now usi
 ## Turn 15 — Craft (2026-06-23 14:55 UTC)
 
 Replaced broken Tesseract installation test with a pure Python-based OCR test using PyTesseract and Pillow, avoiding system-level package management altogether.
+
+## Turn 16 — Manager (2026-06-23 14:59 UTC)
+
+Previous attempt failed due to TERM and CPAN issues. Instead of using cpanm, we'll switch to pure Python-based testing and avoid any system-level Perl dependencies. We will rewrite acceptance_tests.py to use only Python mocking and pytest, and create a new docker_command that installs only necessary Python packages.
