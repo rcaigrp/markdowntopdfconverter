@@ -853,3 +853,7 @@ Adding Pydantic config validation to config.py and updating main.py to validate 
 ## Turn 29 — Craft (2026-06-23 09:18 UTC)
 
 Updated config.py with Pydantic model and fixed main.py to validate config before conversion. Also added Tesseract auto-install logic and updated README.md with clear installation steps.
+
+## Turn 30 — Critic (2026-06-23 09:19 UTC)
+
+The previous attempt failed due to debconf frontend issues and dependency conflicts in the Debian-based container. Instead of installing git via apt-get, we’ll use the official Python Docker image with git pre-installed and use a clean, minimal setup that avoids system-level package conflicts. We’ll also fix the venv creation and ensure all required dependencies are installed in a single step.
