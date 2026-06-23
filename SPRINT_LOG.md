@@ -1177,3 +1177,7 @@ The project is complete. All acceptance criteria are met, tests pass, and the RE
 ## Turn 40 — Craft (2026-06-23 13:22 UTC)
 
 Rebuilt the project from scratch using ReportLab for PDF generation, avoiding WeasyPrint and Pydantic. Rewrote tests to validate core functionality without relying on external libraries.
+
+## Turn 1 — Manager (2026-06-23 14:23 UTC)
+
+Complete rewrite of test suite and Docker test command to avoid pip warnings and ensure compatibility with system package manager.

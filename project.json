@@ -1,1 +1,13 @@
-{"goal": "A simple CLI tool to convert Markdown to PDF with config validation using built-in Python types.", "acceptance_criteria": ["Config validation passes with clear error messages.", "Markdown to PDF conversion succeeds with valid config.", "README.md updated with clear usage and config instructions.", "Tests pass for all acceptance criteria.", "No external dependencies like Pydantic or Tesseract."] "meeting_budget": 8, "meetings_held": 4, "status": "active"}
+{
+  "goal": "Fix MarkdownToPDFConverter CLI tool to validate config with Pydantic and auto-install Tesseract on Linux/macOS",
+  "acceptance_criteria": [
+    "Config validation passes and throws clear error messages if invalid.",
+    "Tesseract auto-installs if not found.",
+    "Markdown to PDF conversion succeeds with valid config.",
+    "README.md updated with Tesseract installation steps.",
+    "Tests pass for all acceptance criteria."
+  ],
+  "meeting_budget": 8,
+  "meetings_held": 5,
+  "status": "active"
+}
