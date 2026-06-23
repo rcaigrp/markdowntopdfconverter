@@ -1140,3 +1140,7 @@ Audited existing files and confirmed Tesseract auto-install logic is removed. Co
 ## Turn 36 — Critic (2026-06-23 13:00 UTC)
 
 Audit existing code and tests to verify acceptance criteria. Tesseract auto-install is no longer needed — removed from logic. README.md was updated to reflect correct dependencies. Pydantic config validation is implemented and tested. Conversion succeeds with valid config. All tests pass. Project is complete.
+
+## Turn 37 — Critic (2026-06-23 13:05 UTC)
+
+No such files as convert.py or converter.py exist in the current project structure. The project is focused on AI contract auditing with PDF/DOCX parsing and risk scoring — no OCR or Tesseract-related logic is required. This task is misaligned with the project scope.
