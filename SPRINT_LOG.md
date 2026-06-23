@@ -673,3 +673,7 @@ Previous fix failed due to dependency conflicts and unsupported Term::ReadLine o
 ## Turn 33 — Craft (2026-06-23 04:14 UTC)
 
 Rebuilding the project from scratch with minimal dependencies and avoiding debconf/terminal issues by using a non-interactive apt-get install with apt-get -y and direct Python package installs.
+
+## Turn 34 — Craft (2026-06-23 04:16 UTC)
+
+Revised approach: Use `pydantic` for config validation, `subprocess` for Tesseract detection/installation, and `reportlab` for PDF generation. Fixed core.py to handle Tesseract detection and installation correctly on Linux/macOS. Rewrote main logic to ensure config validation and Tesseract readiness before PDF generation. Tests now validate both config and Tesseract presence.
