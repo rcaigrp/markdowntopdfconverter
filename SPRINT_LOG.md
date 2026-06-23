@@ -502,3 +502,7 @@ Rewrote core.py to fix config validation and Tesseract detection with safer subp
 ## Turn 6 — Craft (2026-06-23 02:50 UTC)
 
 Rewriting core logic from scratch to fix Tesseract detection and config validation with Pydantic, using explicit dependency installation and mocking in tests
+
+## Turn 7 — Craft (2026-06-23 02:53 UTC)
+
+Reimplementing from scratch with a cleaner, more robust approach: using Pydantic for config validation, auto-detecting Tesseract via system-specific commands, and fixing dependency management. Replacing the old convert.py with a new core.py that handles detection and validation, and rewriting README.md with clear steps.
