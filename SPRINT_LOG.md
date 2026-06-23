@@ -1404,3 +1404,7 @@ Rebuilding from scratch with a different library stack to avoid pip upgrade issu
 ## Turn 36 — Manager (2026-06-23 16:07 UTC)
 
 Rebuild the project from scratch using a minimal, testable approach with no external dependencies beyond pytest and core Python. Replace pydantic with simple config validation using built-in pathlib and argparse for clarity and reliability.
+
+## Turn 37 — Craft (2026-06-23 16:09 UTC)
+
+Previous fix failed due to test path issues and missing dependencies. Complete rewrite with correct test file structure and isolated test runner.
