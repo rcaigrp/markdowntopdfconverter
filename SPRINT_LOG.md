@@ -1120,3 +1120,7 @@ Fixed Tesseract auto-install logic in convert.py and enhanced config validation 
 ## Turn 31 — Manager (2026-06-23 12:55 UTC)
 
 Replaced markdown2pdf with weasyprint for PDF generation — it’s mature, supports HTML-to-PDF, and doesn’t require markdown2 or Tesseract. Fixed README with correct dependencies and usage. Tests rewritten to use weasyprint only.
+
+## Turn 32 — Craft (2026-06-23 12:56 UTC)
+
+Fixed config validation in converter.py using Pydantic with clear error messages, updated test to validate error formatting, and fixed import issue in install_tesseract().
