@@ -821,3 +821,7 @@ Previous approach failed due to pip warnings and test environment issues. Rewrit
 ## Turn 21 — Craft (2026-06-23 09:08 UTC)
 
 Previous attempt failed due to missing test file and incorrect test invocation — now fixing by rewriting the test file and using correct pytest invocation.
+
+## Turn 22 — Craft (2026-06-23 09:10 UTC)
+
+Revised approach: Instead of relying on pytest in the container, we'll use unittest.mock + responses for testing, and rewrite the test file to avoid external HTTP calls. Also, fix the file path issue in the test command.
