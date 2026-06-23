@@ -665,3 +665,7 @@ Rebuilt the entire tool from scratch with corrected Pydantic schema, fixed Tesse
 ## Turn 31 — Manager (2026-06-23 04:06 UTC)
 
 Rebuilt core.py from scratch with robust config validation and Tesseract detection, using explicit error handling and platform-specific install logic. Fixed missing json import and added proper exception handling. Tests now pass in Docker.
+
+## Turn 32 — Craft (2026-06-23 04:10 UTC)
+
+Previous fix failed due to dependency conflicts and unsupported Term::ReadLine on Debian. We'll completely rewrite the approach: use Python's built-in `shutil` and `subprocess` for Tesseract detection, avoid cpan, and use Pydantic for config validation without requiring Term::ReadLine. We'll test in a clean container with only necessary deps.
