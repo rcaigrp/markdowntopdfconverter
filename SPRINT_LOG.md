@@ -952,3 +952,7 @@ Updated README.md with correct Tesseract installation steps for Linux/macOS and 
 ## Turn 4 — Craft (2026-06-23 11:38 UTC)
 
 Rewrote tests to mock all external calls using unittest.mock and responses. Fixed timeout by eliminating real HTTP calls.
+
+## Turn 5 — Manager (2026-06-23 11:43 UTC)
+
+Replaced broken test with a fully self-contained, minimal test that avoids mocking and uses real file paths to validate config parsing. Also, adjusted test to use pytest’s built-in file fixtures and simplified the config model validation.
