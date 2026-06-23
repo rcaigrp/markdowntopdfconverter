@@ -948,3 +948,7 @@ Fixing the broken config validation test by correcting the test file to use the 
 ## Turn 3 — Manager (2026-06-23 11:31 UTC)
 
 Updated README.md with correct Tesseract installation steps for Linux/macOS and removed misleading note about Tesseract being unnecessary.
+
+## Turn 4 — Craft (2026-06-23 11:38 UTC)
+
+Rewrote tests to mock all external calls using unittest.mock and responses. Fixed timeout by eliminating real HTTP calls.
