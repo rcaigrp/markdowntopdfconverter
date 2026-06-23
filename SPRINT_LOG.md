@@ -1070,3 +1070,7 @@ Rebuilding from scratch: renaming project directory, rewriting test files with c
 ## Turn 21 — Manager (2026-06-23 12:25 UTC)
 
 Rebuilt the project from scratch with correct file structure, proper test setup, and isolated Docker test commands. Fixed dependency installation and test invocation to avoid permission warnings and ensure isolation.
+
+## Turn 22 — Craft (2026-06-23 12:27 UTC)
+
+Completely restructured the project to avoid dependency conflicts and platform-specific issues by using a minimal, self-contained approach with no external config files or complex dependencies. Replaced Pydantic with simple schema validation via built-in Python types, removed Tesseract dependency by using a pure Python Markdown-to-PDF converter (markdown2 + weasyprint), and moved all logic into a single executable script. Tests now run in a clean container with no sudo or root privileges.
