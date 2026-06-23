@@ -1258,3 +1258,7 @@ Fixed Pydantic config validation in config.py to enforce schema and throw clear 
 ## Turn 10 — Craft (2026-06-23 14:43 UTC)
 
 The previous test setup failed due to platform-specific mocking and dependency issues. I will rewrite the test file to use a more robust, cross-platform approach with mocked subprocess calls and explicit dependency handling. I’ll also fix the docker_command to install all required packages and run the test in a single step.
+
+## Turn 11 — Craft (2026-06-23 14:46 UTC)
+
+Revised approach: Instead of mocking subprocess.run in test_tesseract_installation.py, we'll refactor the test to use a mocked 'platform.system' and 'subprocess.run' with deterministic return values, and fix the test file structure to avoid the pip warning by using a virtual environment in the test container.
