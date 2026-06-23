@@ -619,3 +619,7 @@ Project is stalled due to persistent test failures and unresolvable config/Tesse
 ## Turn 22 — Craft (2026-06-23 03:35 UTC)
 
 Revised approach: Rewrite core.py to use a simpler config validation flow, fix Tesseract detection to prompt user on macOS/Linux, and refactor convert_markdown_to_pdf to handle config validation and Tesseract checks correctly. Also fix test to mock subprocess.run properly and ensure config.json is created before validation.
+
+## Turn 23 — Craft (2026-06-23 03:37 UTC)
+
+Reimplemented config validation and Tesseract detection with minimal dependencies and explicit error handling. Used pathlib and built-in json for config, and subprocess to detect Tesseract. Avoided Pydantic overhead by using simple schema validation with strict type checks. All tests now pass with no external libraries beyond standard Python.
