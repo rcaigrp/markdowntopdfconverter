@@ -857,3 +857,7 @@ Updated config.py with Pydantic model and fixed main.py to validate config befor
 ## Turn 30 — Critic (2026-06-23 09:19 UTC)
 
 The previous attempt failed due to debconf frontend issues and dependency conflicts in the Debian-based container. Instead of installing git via apt-get, we’ll use the official Python Docker image with git pre-installed and use a clean, minimal setup that avoids system-level package conflicts. We’ll also fix the venv creation and ensure all required dependencies are installed in a single step.
+
+## Turn 31 — Critic (2026-06-23 09:22 UTC)
+
+Previous attempt failed due to debconf/Term::ReadLine issues in Debian-based container. This is a packaging/dependency conflict, not a code issue. We must avoid installing git via apt-get and instead use a minimal Python image with git pre-installed or install git via pipx or curl.
