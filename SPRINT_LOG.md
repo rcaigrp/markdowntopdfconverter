@@ -530,3 +530,7 @@ The previous approach failed because config validation and Tesseract detection l
 ## Turn 13 — Manager (2026-06-23 03:09 UTC)
 
 Revised approach: Rewrite core.py to use subprocess.run with explicit Tesseract detection and install logic, and fix config validation to return a validated object instead of just calling model_validate. Also fix main.py to handle missing config and invalid config gracefully.
+
+## Turn 14 — Craft (2026-06-23 03:11 UTC)
+
+Reimplementing the CLI tool from scratch with stricter validation and platform-specific Tesseract detection using a more robust approach with subprocess and direct command execution.
