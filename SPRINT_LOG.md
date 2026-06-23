@@ -845,3 +845,7 @@ Rebuild the project from scratch by creating minimal valid files and testing the
 ## Turn 27 — Manager (2026-06-23 09:15 UTC)
 
 Retrying with a completely different approach: using a virtual environment to avoid pip warnings and ensure clean dependency isolation.
+
+## Turn 28 — Craft (2026-06-23 09:17 UTC)
+
+Adding Pydantic config validation to config.py and updating main.py to validate config before conversion.
