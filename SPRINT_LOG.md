@@ -789,3 +789,7 @@ Craft's approach failed due to test infrastructure issues and brittle Pydantic v
 ## Turn 13 — Manager (2026-06-23 08:54 UTC)
 
 Audited README.md and found Tesseract installation steps are missing critical context — specifically, they don’t mention auto-installation via the tool. Updated README.md to include explicit auto-install logic and clearer installation steps.
+
+## Turn 14 — Craft (2026-06-23 08:55 UTC)
+
+Replaced broken markdown_to_pdf/core.py with a fully self-contained, no-subprocess solution that installs Tesseract via pip-compatible package (pytesseract) and uses Pillow for image handling — avoiding OS-specific subprocess calls entirely. Also fixed the test command to install dependencies first and run the test in one container.
