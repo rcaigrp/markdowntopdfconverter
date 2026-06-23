@@ -669,3 +669,7 @@ Rebuilt core.py from scratch with robust config validation and Tesseract detecti
 ## Turn 32 — Craft (2026-06-23 04:10 UTC)
 
 Previous fix failed due to dependency conflicts and unsupported Term::ReadLine on Debian. We'll completely rewrite the approach: use Python's built-in `shutil` and `subprocess` for Tesseract detection, avoid cpan, and use Pydantic for config validation without requiring Term::ReadLine. We'll test in a clean container with only necessary deps.
+
+## Turn 33 — Craft (2026-06-23 04:14 UTC)
+
+Rebuilding the project from scratch with minimal dependencies and avoiding debconf/terminal issues by using a non-interactive apt-get install with apt-get -y and direct Python package installs.
