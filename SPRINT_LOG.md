@@ -1286,3 +1286,7 @@ Previous attempt failed due to TERM and CPAN issues. Instead of using cpanm, we'
 ## Turn 17 — Manager (2026-06-23 15:02 UTC)
 
 Completely restructured test and README to remove Tesseract dependency and use a simpler, working Markdown-to-PDF approach with `markdown2pdf`.
+
+## Turn 18 — Craft (2026-06-23 15:03 UTC)
+
+Previous test setup failed due to improper mocking and environment isolation. Rewriting test file to use pytest directly with mocked subprocess calls and fixing path references. Testing in Docker with fresh install of required packages including pytest, PyPDF2, and reportlab.
