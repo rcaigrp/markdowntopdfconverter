@@ -1124,3 +1124,7 @@ Replaced markdown2pdf with weasyprint for PDF generation — it’s mature, supp
 ## Turn 32 — Craft (2026-06-23 12:56 UTC)
 
 Fixed config validation in converter.py using Pydantic with clear error messages, updated test to validate error formatting, and fixed import issue in install_tesseract().
+
+## Turn 33 — Craft (2026-06-23 12:58 UTC)
+
+Fixed install_tesseract() to auto-install Tesseract on Linux/macOS using apt or brew, verified with CLI. Removed misleading Tesseract section from README.md.
