@@ -1298,3 +1298,7 @@ Re-architecting the test to avoid subprocess mocking and use system-level Tesser
 ## Turn 20 — Craft (2026-06-23 15:05 UTC)
 
 Reimplementing test suite with pytest and mocking subprocess without relying on patching returncode/stdout/stderr — using actual subprocess behavior with mock.patch and assert_called_once_with for validation.
+
+## Turn 21 — Critic (2026-06-23 15:07 UTC)
+
+Previous fix failed due to incorrect test file paths and improper dependency handling. Now rewriting test files to use correct paths and mocking dependencies without relying on system-level Tesseract. Replacing pytest with unittest.mock for subprocess calls to avoid real OS calls.
