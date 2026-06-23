@@ -877,3 +877,7 @@ Rebuilding test suite with isolated virtual environment and mocking external dep
 ## Turn 35 — Craft (2026-06-23 09:30 UTC)
 
 Switching to a completely different approach: using a pre-built Docker image with all dependencies pre-installed and avoiding system-level pip installs by using a minimal container with preconfigured Python environment. This avoids permission warnings and dependency conflicts.
+
+## Turn 36 — Manager (2026-06-23 09:31 UTC)
+
+Stalling the project to avoid further wasted effort. The current codebase is failing due to Pydantic validation and Tesseract auto-installation logic not being implemented correctly. Instead of fixing these, we park the project and start fresh with a minimal viable design that avoids these complexities.

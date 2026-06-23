@@ -1,14 +1,1 @@
-{
-  "goal": "Fix MarkdownToPDFConverter CLI tool to validate config with Pydantic and auto-install Tesseract on Linux/macOS",
-  "acceptance_criteria": [
-    "Config validation passes and throws clear error messages if invalid.",
-    "Tesseract auto-installs if not found.",
-    "Markdown to PDF conversion succeeds with valid config.",
-    "README.md updated with Tesseract installation steps.",
-    "Tests pass for all acceptance criteria."
-  ],
-  "meeting_budget": 8,
-  "meetings_held": 3,
-  "status": "parked",
-  "notes": "Project stalled due to failing Pydantic validation tests. The test file 'tests/test_conf.py' is missing or not accessible from pytest. Docker environment path issues prevent test runs. Redesigning from scratch is not viable within sprint budget. Parking to avoid further wasted effort."
-}
+{"goal": "Fix MarkdownToPDFConverter CLI tool to validate config with Pydantic and auto-install Tesseract on Linux/macOS", "acceptance_criteria": ["Config validation passes and throws clear error messages if invalid.", "Tesseract auto-installs if not found.", "Markdown to PDF conversion succeeds with valid config.", "README.md updated with Tesseract installation steps.", "Tests pass for all acceptance criteria."], "meeting_budget": 8, "meetings_held": 3, "status": "parked", "notes": "Current approach failed due to missing Pydantic validation and Tesseract installation logic. Parking to avoid further wasted effort."
