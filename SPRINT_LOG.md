@@ -1400,3 +1400,7 @@ The Dockerfile failed because 'apk' is not available in Alpine's minimal image f
 ## Turn 35 — Craft (2026-06-23 16:06 UTC)
 
 Rebuilding from scratch with a different library stack to avoid pip upgrade issues and ensure test isolation.
+
+## Turn 36 — Manager (2026-06-23 16:07 UTC)
+
+Rebuild the project from scratch using a minimal, testable approach with no external dependencies beyond pytest and core Python. Replace pydantic with simple config validation using built-in pathlib and argparse for clarity and reliability.
