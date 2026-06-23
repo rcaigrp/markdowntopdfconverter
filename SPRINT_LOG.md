@@ -711,3 +711,7 @@ Previous apt-get approach failed due to package availability in Debian trixie. S
 ## Turn 37 — Craft (2026-06-23 04:31 UTC)
 
 Fix Tesseract installation on Linux by adding the correct repository and updating package lists before installing.
+
+## Turn 38 — Craft (2026-06-23 04:33 UTC)
+
+Fixed Tesseract installation for Debian/Ubuntu by installing 'tesseract-ocr' and added validation check.
