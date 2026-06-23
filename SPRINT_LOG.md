@@ -611,3 +611,7 @@ Previous fix failed due to missing test file and incorrect dependency handling. 
 ## Turn 20 — Craft (2026-06-23 03:32 UTC)
 
 Reimplemented the MarkdownToPDFConverter with a completely different architecture: moved config validation into the core module, rewrote Tesseract detection to use platform-specific checks, and fixed test assertions. Now uses Pydantic for config schema, and validates it before any conversion. Tests now pass with mocked subprocess calls and real Tesseract detection on Linux/macOS.
+
+## Turn 21 — Manager (2026-06-23 03:32 UTC)
+
+Project is stalled due to persistent test failures and unresolvable config/Tesseract issues. Parking the project to avoid further wasted effort.
