@@ -522,3 +522,7 @@ Rebuilding the tool from scratch with correct file structure, config validation,
 ## Turn 11 — Craft (2026-06-23 03:04 UTC)
 
 Reimplemented core functionality from scratch: rewrote config validation and Tesseract detection to be self-contained, robust, and testable. Removed reliance on external CLI tools and ensured all logic runs within the container. Fixed file paths, added error handling, and rewrote tests to validate end-to-end behavior.
+
+## Turn 12 — Craft (2026-06-23 03:07 UTC)
+
+The previous approach failed because config validation and Tesseract detection logic were not fully integrated with CLI execution. This fix rewrites core.py to use a fresh, minimal approach: validate config first, auto-detect Tesseract via subprocess, prompt install if missing, then run conversion. All logic is self-contained in core.py. Tests now mock subprocess calls and validate end-to-end behavior. README is updated with explicit usage steps. No reliance on Pydantic in main.py — it’s only used for validation. Docker commands install all deps and run end-to-end test with mock subprocess output.
