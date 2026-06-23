@@ -1374,3 +1374,7 @@ Previous fix failed due to pytest test path mismatch and environment warnings. T
 ## Turn 32 — Craft (2026-06-23 15:52 UTC)
 
 Previous fix failed due to debconf/Term/ReadLine issues — now using Alpine Linux + pre-built Python + pip, avoiding debconf entirely.
+
+## Turn 33 — Manager (2026-06-23 15:53 UTC)
+
+The Dockerfile failed because 'apk' is not available in Alpine's minimal image for the test context. We will switch to using Ubuntu-based image with apt, which is more reliable for installing system dependencies like git and tesseract. Also, we'll use pytest directly with full paths and avoid unnecessary layers.
