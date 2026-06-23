@@ -460,3 +460,7 @@ Resuming 'MarkdownToPDFConverter' project by updating project.json to 'active' a
 ## Turn 40 — Manager (2026-06-22 23:51 UTC)
 
 Resuming 'MarkdownToPDFConverter' project by updating project.json to 'active' and adding 2 meetings to budget.
+
+## Turn 1 — Manager (2026-06-23 02:24 UTC)
+
+Rebuilding the project from scratch with a more robust approach: using a virtual environment, fixing config validation with Pydantic, and adding proper Tesseract detection with fallback prompts. All files rewritten, tests rewritten to use pytest with full dependencies installed in one docker command.

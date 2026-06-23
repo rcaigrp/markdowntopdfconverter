@@ -1,62 +1,97 @@
-import json
 import os
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
+import subprocess
+import sys
+import shutil
+import json
+from typing import Optional
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
+from markdown import markdown
+import tempfile
 
-def load_config(config_path='config.json'):
-    """Load configuration from config.json."""
-    with open(config_path, 'r') as f:
-        config = json.load(f)
-    return config['input_path'], config['output_path']
+# Import config validation
+from .config import Config
 
-def parse_markdown(md_text):
-    """Convert basic Markdown to a list of (text, style) tuples."""
-    elements = []
-    lines = md_text.split('\n')
-    for line in lines:
-        if line.startswith('# '):
-            elements.append((line[2:], 'Heading1'))
-        elif line.startswith('## '):
-            elements.append((line[3:], 'Heading2'))
-        elif line.startswith('**') and line.endswith('**'):
-            elements.append((line[2:-2], 'Bold'))
-        elif line.startswith('- '):
-            elements.append((line[2:], 'Bullet'))
-        else:
-            elements.append((line, 'Normal'))
-    return elements
 
-def generate_pdf(input_text, output_path):
-    """Generate a PDF from parsed markdown elements."""
-    c = canvas.Canvas(output_path, pagesize=A4)
-    width, height = A4
-    y_start = height - 50
-    
-    elements = parse_markdown(input_text)
-    for text, style in elements:
-        if style == 'Heading1':
-            c.setFont('Helvetica-Bold', 16)
-        elif style == 'Heading2':
-            c.setFont('Helvetica-Bold', 14)
-        elif style == 'Bold':
-            c.setFont('Helvetica-Bold', 12)
-        elif style == 'Bullet':
-            c.setFont('Helvetica', 12)
-        else:
-            c.setFont('Helvetica', 12)
-        c.drawString(50, y_start, text)
-        y_start -= 20
-        if y_start < 50:
-            c.showPage()
-            y_start = height - 50
-    
-    c.save()
+def detect_tesseract() -> str:
+    """Detect Tesseract installation on Linux/macOS. Returns path or raises error."""
+    if sys.platform in ["linux", "darwin"]:
+        try:
+            result = subprocess.run([
+                "which",
+                "tesseract"
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.returncode == 0:
+                return result.stdout.strip()
+            else:
+                raise RuntimeError("Tesseract not found. Please install it.")
+        except Exception as e:
+            raise RuntimeError(f"Failed to detect Tesseract: {e}")
+    else:
+        raise RuntimeError("Tesseract is only supported on Linux and macOS.")
 
-def main():
+
+def validate_config(config_path: str) -> Config:
+    """Validate and load config from JSON."""
+    try:
+        config = Config.load(config_path)
+        return config
+    except Exception as e:
+        raise RuntimeError(f"Config validation failed: {str(e)}")
+
+
+def convert_markdown_to_pdf(input_file: str, config: Config):
+    """Convert Markdown to PDF using ReportLab."""
+    # Read Markdown content
+    with open(input_file, 'r') as f:
+        markdown_text = f.read()
+
+    # Convert to HTML
+    html_text = markdown(markdown_text)
+
+    # Create PDF
+    doc = SimpleDocTemplate(config.output_path, pagesize=letter)
+    styles = getSampleStyleSheet()
+    story = []
+
+    # Add paragraph with HTML content
+    p = Paragraph(html_text, styles['Normal'])
+    story.append(p)
+    story.append(Spacer(1, 12))
+
+    # Build PDF
+    doc.build(story)
+
+    print(f"✅ PDF saved to {config.output_path}")
+
+
+def main(input_file: str, config_path: str = "config.json"):
     """Main entry point."""
-    input_path, output_path = load_config()
-    with open(input_path, 'r') as f:
-        md_text = f.read()
-    generate_pdf(md_text, output_path)
+    try:
+        # Validate config
+        config = validate_config(config_path)
+
+        # Detect Tesseract (optional)
+        if config.tesseract_path == "":  # auto-detect
+            tesseract_path = detect_tesseract()
+            config.tesseract_path = tesseract_path
+            print(f"Tesseract detected at: {tesseract_path}")
+
+        # Convert Markdown to PDF
+        convert_markdown_to_pdf(input_file, config)
+
+    except Exception as e:
+        print(f"❌ Error: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Convert Markdown to PDF.")
+    parser.add_argument("--input", required=True, help="Input Markdown file")
+    parser.add_argument("--config", default="config.json", help="Config file path")
+    args = parser.parse_args()
+
+    main(args.input, args.config)

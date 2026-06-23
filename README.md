@@ -1,30 +1,27 @@
 # MarkdownToPDFConverter
 
-A simple Python CLI tool to convert Markdown documents to PDF files using reportlab.
+Converts Markdown files to PDF using ReportLab.
 
 ## Installation
-
 ```bash
-pip install reportlab
+pip install -r requirements.txt
 ```
 
 ## Usage
-
-1. Create a `config.json` file with your input and output paths:
-```json
-{
-  "input_path": "input.md",
-  "output_path": "output.pdf"
-}
-```
-
-2. Create a Markdown file `input.md`.
-
-3. Run the tool:
 ```bash
-python -m markdown_to_pdf
+markdown_to_pdf --input README.md --output output.pdf
 ```
 
 ## Configuration
+The tool reads `config.json`. Example:
+```json
+{
+  "output_path": "output.pdf",
+  "font_size": 12
+}
+```
 
-- `config.json`: Defines input and output file paths.
+## Dependencies
+- Pydantic (for config validation)
+- ReportLab (for PDF generation)
+- Tesseract (for image-based Markdown if needed — auto-detected on Linux/macOS)
