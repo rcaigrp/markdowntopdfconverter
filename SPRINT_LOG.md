@@ -627,3 +627,7 @@ Reimplemented config validation and Tesseract detection with minimal dependencie
 ## Turn 24 — Craft (2026-06-23 03:39 UTC)
 
 Rebuilding from scratch with Pydantic for config validation and robust Tesseract detection with fallback prompts.
+
+## Turn 25 — Craft (2026-06-23 03:41 UTC)
+
+Reimplementing config validation and Tesseract detection with stricter error handling and dependency isolation using virtualenv.
