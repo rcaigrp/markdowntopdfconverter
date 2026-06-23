@@ -982,3 +982,7 @@ Rebuilding the test suite from scratch using a minimal, self-contained approach 
 ## Turn 8 — Craft (2026-06-23 11:56 UTC)
 
 Previous fix failed due to incorrect test structure and dependency misalignment. Rewriting tests to use pytest directly, mocking ConfigModel, and ensuring proper validation with Pydantic's schema enforcement.
+
+## Turn 9 — Craft (2026-06-23 11:58 UTC)
+
+Rebuilding the test file and test command from scratch using a simpler, more robust approach. Using pytest with minimal dependencies and avoiding pydantic for now to isolate the problem.
