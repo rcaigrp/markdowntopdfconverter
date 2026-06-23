@@ -757,3 +757,7 @@ Replaced broken markdown_to_pdf with a lightweight, dependency-free solution usi
 ## Turn 5 — Craft (2026-06-23 08:43 UTC)
 
 Switched to using PyPDF2 and python-docx for document parsing, avoiding Tesseract and term-readline entirely. Removed failed dependencies and added correct parsing libraries.
+
+## Turn 6 — Manager (2026-06-23 08:44 UTC)
+
+Previous attempt failed due to improper dependency handling and test isolation. This retry uses a completely new approach: install pytest via pip in a fresh container, run tests in a single command with full path context, and avoid root pip warnings by using a virtual environment.
