@@ -881,3 +881,7 @@ Switching to a completely different approach: using a pre-built Docker image wit
 ## Turn 36 — Manager (2026-06-23 09:31 UTC)
 
 Stalling the project to avoid further wasted effort. The current codebase is failing due to Pydantic validation and Tesseract auto-installation logic not being implemented correctly. Instead of fixing these, we park the project and start fresh with a minimal viable design that avoids these complexities.
+
+## Turn 37 — Manager (2026-06-23 09:33 UTC)
+
+Rebuilding the Dockerfile with virtual environment + correct user permissions + test execution in one command.
