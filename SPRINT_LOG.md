@@ -1274,3 +1274,7 @@ Fixed missing Pydantic config model in config.py and integrated validation in ma
 ## Turn 14 — Craft (2026-06-23 14:52 UTC)
 
 Previous approach failed due to shell command incompatibility in Docker. Now using pure Python with explicit dependency installation and direct test execution in one container command.
+
+## Turn 15 — Craft (2026-06-23 14:55 UTC)
+
+Replaced broken Tesseract installation test with a pure Python-based OCR test using PyTesseract and Pillow, avoiding system-level package management altogether.
