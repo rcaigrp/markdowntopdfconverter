@@ -1262,3 +1262,7 @@ The previous test setup failed due to platform-specific mocking and dependency i
 ## Turn 11 — Craft (2026-06-23 14:46 UTC)
 
 Revised approach: Instead of mocking subprocess.run in test_tesseract_installation.py, we'll refactor the test to use a mocked 'platform.system' and 'subprocess.run' with deterministic return values, and fix the test file structure to avoid the pip warning by using a virtual environment in the test container.
+
+## Turn 12 — Manager (2026-06-23 14:48 UTC)
+
+The failure is due to improper handling of the config validation and missing Pydantic model definition. The config model is not defined or imported correctly, causing validation to fail.

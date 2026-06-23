@@ -1,22 +1,26 @@
-import os
-import markdown
-from fpdf2 import FPDF
-from fpdf2.html import HtmlMixin
+import subprocess
+import sys
+from pathlib import Path
 
-class PDFConverter(HtmlMixin, FPDF):
-    pass
+from markdown_to_pdf.config import Config
 
-def convert_md_to_pdf(input_path, output_path):
-    if not os.path.exists(input_path):
-        raise FileNotFoundError(f"Input file not found: {input_path}")
-    
-    with open(input_path, 'r', encoding='utf-8') as f:
-        md_text = f.read()
-    
-    html_text = markdown.markdown(md_text)
-    
-    pdf = PDFConverter()
-    pdf.add_page()
-    pdf.write_html(html_text)
-    
-    pdf.output(output_path)
+
+def convert_markdown_to_pdf(input_path: str, output_path: str):
+    # Check if markdown2pdf is installed
+    try:
+        result = subprocess.run(
+            ["markdown2pdf", input_path],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        # Write output to file
+        with open(output_path, "w") as f:
+            f.write(result.stdout)
+        return
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to convert Markdown to PDF: {e}", file=sys.stderr)
+        sys.exit(1)
+    except FileNotFoundError:
+        print(f"markdown2pdf not found. Install it using: pip install markdown2pdf", file=sys.stderr)
+        sys.exit(1)

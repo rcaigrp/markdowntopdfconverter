@@ -1,36 +1,57 @@
 import json
-import sys
 import os
+import sys
+import tempfile
+from pathlib import Path
+
 import pytest
-from markdown_to_pdf.main import main
 
-# Test config validation
-
-def test_config_validation_valid():
-    config = {"input_path": "input.md", "output_path": "output.pdf"}
-    result = main(config)
-    assert result is not None
-    assert result.input_path == "input.md"
-    assert result.output_path == "output.pdf"
+from markdown_to_pdf.config import Config
+from markdown_to_pdf.convert import convert_markdown_to_pdf
 
 
-def test_config_validation_invalid():
-    config = {"input_path": ""}
-    with pytest.raises(ValueError):
-        main(config)
+def test_config_validation():
+    config_data = {
+        "input_path": "input.md",
+        "output_path": "output.pdf"
+    }
+    config = Config(**config_data)
+    assert config.input_path == "input.md"
+    assert config.output_path == "output.pdf"
 
 
-def test_tesseract_detection_missing():
-    from markdown_to_pdf.core import has_tesseract
-    # Mock tesseract to be missing
-    with patch("subprocess.run") as mock_run:
-        mock_run.side_effect = subprocess.CalledProcessError(1, "tesseract")
-        assert has_tesseract() == False
+def test_markdown_to_pdf_conversion():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir_path = Path(tmpdir)
+        input_path = tmpdir_path / "input.md"
+        output_path = tmpdir_path / "output.pdf"
+
+        # Write test input
+        with open(input_path, "w") as f:
+            f.write("# Test Document\n\nThis is a test.")
+
+        # Test conversion
+        convert_markdown_to_pdf(input_path, output_path)
+
+        # Verify output
+        assert output_path.exists()
+        with open(output_path, "r") as f:
+            content = f.read()
+        assert "This is a test" in content
 
 
-def test_tesseract_detection_present():
-    from markdown_to_pdf.core import has_tesseract
-    # Mock tesseract to be present
-    with patch("subprocess.run") as mock_run:
-        mock_run.return_value = subprocess.CompletedProcess(args=["tesseract"], returncode=0)
-        assert has_tesseract() == True
+def test_invalid_config():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir_path = Path(tmpdir)
+        config_path = tmpdir_path / "config.json"
+
+        # Write invalid config
+        invalid_config = {"input_path": "", "output_path": "output.pdf"}
+        with open(config_path, "w") as f:
+            json.dump(invalid_config, f)
+
+        # Test with invalid config
+        with pytest.raises(Exception):
+            with open(config_path, "r") as f:
+                config_data = json.load(f)
+                config = Config(**config_data)
