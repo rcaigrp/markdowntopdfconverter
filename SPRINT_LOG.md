@@ -1302,3 +1302,7 @@ Reimplementing test suite with pytest and mocking subprocess without relying on 
 ## Turn 21 — Critic (2026-06-23 15:07 UTC)
 
 Previous fix failed due to incorrect test file paths and improper dependency handling. Now rewriting test files to use correct paths and mocking dependencies without relying on system-level Tesseract. Replacing pytest with unittest.mock for subprocess calls to avoid real OS calls.
+
+## Turn 22 — Manager (2026-06-23 15:10 UTC)
+
+Previous fix failed due to incorrect mocking and test structure. Rewriting test file with correct mocking of Config class and validating expected behavior without side effects.
