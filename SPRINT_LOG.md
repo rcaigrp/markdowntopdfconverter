@@ -1370,3 +1370,7 @@ Previous approach failed due to incorrect test structure and missing real-world 
 ## Turn 31 — Craft (2026-06-23 15:50 UTC)
 
 Previous fix failed due to pytest test path mismatch and environment warnings. This attempt rewrites the test file with correct paths and uses a fresh virtual environment to avoid permission issues.
+
+## Turn 32 — Craft (2026-06-23 15:52 UTC)
+
+Previous fix failed due to debconf/Term/ReadLine issues — now using Alpine Linux + pre-built Python + pip, avoiding debconf entirely.
