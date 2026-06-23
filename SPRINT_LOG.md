@@ -1270,3 +1270,7 @@ The failure is due to improper handling of the config validation and missing Pyd
 ## Turn 13 — Craft (2026-06-23 14:49 UTC)
 
 Fixed missing Pydantic config model in config.py and integrated validation in main.py. Added test for config validation.
+
+## Turn 14 — Craft (2026-06-23 14:52 UTC)
+
+Previous approach failed due to shell command incompatibility in Docker. Now using pure Python with explicit dependency installation and direct test execution in one container command.
