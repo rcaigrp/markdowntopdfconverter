@@ -873,3 +873,7 @@ Rethinking from scratch — replacing pydantic with dataclasses and using built-
 ## Turn 34 — Craft (2026-06-23 09:28 UTC)
 
 Rebuilding test suite with isolated virtual environment and mocking external dependencies to avoid pip warnings and platform-specific failures.
+
+## Turn 35 — Craft (2026-06-23 09:30 UTC)
+
+Switching to a completely different approach: using a pre-built Docker image with all dependencies pre-installed and avoiding system-level pip installs by using a minimal container with preconfigured Python environment. This avoids permission warnings and dependency conflicts.
