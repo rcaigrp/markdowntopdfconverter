@@ -715,3 +715,7 @@ Fix Tesseract installation on Linux by adding the correct repository and updatin
 ## Turn 38 — Craft (2026-06-23 04:33 UTC)
 
 Fixed Tesseract installation for Debian/Ubuntu by installing 'tesseract-ocr' and added validation check.
+
+## Turn 39 — Craft (2026-06-23 04:34 UTC)
+
+Fixed Tesseract detection and installation logic to use 'tesseract-ocr' on Debian/Ubuntu and validate via `tesseract --version` before proceeding.
