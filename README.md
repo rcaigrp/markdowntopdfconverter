@@ -5,7 +5,7 @@ A simple Python CLI tool to convert Markdown documents to PDF files using report
 ## Installation
 
 ```bash
-pip install reportlab pillow
+pip install reportlab pillow pydantic
 ```
 
 ## Usage
@@ -31,18 +31,14 @@ python -m markdown_to_pdf
 
 ## Tesseract Installation (Linux/macOS)
 
-On Linux:
-```bash
-sudo apt-get install tesseract-ocr
-```
+Tesseract is required for image-based Markdown conversion. Install via:
 
-On macOS:
 ```bash
+# Linux (Ubuntu/Debian)
+apt-get update && apt-get install -y tesseract-ocr
+
+# macOS (using Homebrew)
 brew install tesseract
 ```
 
-## Dependencies
-
-- `reportlab`: For PDF generation.
-- `pillow`: For image handling (needed by reportlab).
-- `tesseract`: For OCR (if converting images).
+The tool will auto-detect and prompt for installation if missing.

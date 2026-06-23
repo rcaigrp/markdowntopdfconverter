@@ -661,3 +661,7 @@ Rebuilding from scratch with correct Pydantic validation, Tesseract detection, a
 ## Turn 30 — Craft (2026-06-23 04:03 UTC)
 
 Rebuilt the entire tool from scratch with corrected Pydantic schema, fixed Tesseract detection/prompt logic, and added proper test coverage. All files rewritten for correctness and compatibility.
+
+## Turn 31 — Manager (2026-06-23 04:06 UTC)
+
+Rebuilt core.py from scratch with robust config validation and Tesseract detection, using explicit error handling and platform-specific install logic. Fixed missing json import and added proper exception handling. Tests now pass in Docker.
