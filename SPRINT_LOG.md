@@ -1294,3 +1294,7 @@ Previous test setup failed due to improper mocking and environment isolation. Re
 ## Turn 19 — Craft (2026-06-23 15:04 UTC)
 
 Re-architecting the test to avoid subprocess mocking and use system-level Tesseract check instead of mocking install.
+
+## Turn 20 — Craft (2026-06-23 15:05 UTC)
+
+Reimplementing test suite with pytest and mocking subprocess without relying on patching returncode/stdout/stderr — using actual subprocess behavior with mock.patch and assert_called_once_with for validation.
