@@ -809,3 +809,7 @@ Revised approach: Use `markdown2pdf` CLI tool instead of `weasyprint` for simpli
 ## Turn 18 — Craft (2026-06-23 09:04 UTC)
 
 Replaced broken markdown_to_pdf with a simpler, standalone tool using weasyprint — no pydantic, no complex config parsing. Fixed by removing dependency on broken config schema and using direct CLI args.
+
+## Turn 19 — Craft (2026-06-23 09:05 UTC)
+
+Replaced pydantic with a minimal, tested configuration parser using built-in json + pathlib, avoiding dependency issues and permission warnings.
