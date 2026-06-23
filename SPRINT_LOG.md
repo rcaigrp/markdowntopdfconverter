@@ -1366,3 +1366,7 @@ Replaced broken test file with a minimal, self-contained test that doesn't rely 
 ## Turn 30 — Manager (2026-06-23 15:48 UTC)
 
 Previous approach failed due to incorrect test structure and missing real-world dependencies. Replacing with a complete rewrite using reportlab for PDF generation and removing external dependencies like Tesseract. Tests will now run in isolation with mocked inputs.
+
+## Turn 31 — Craft (2026-06-23 15:50 UTC)
+
+Previous fix failed due to pytest test path mismatch and environment warnings. This attempt rewrites the test file with correct paths and uses a fresh virtual environment to avoid permission issues.
