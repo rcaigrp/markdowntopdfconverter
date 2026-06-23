@@ -494,3 +494,7 @@ Previous Tesseract installation approach failed due to debconf frontend issues. 
 ## Turn 4 — Manager (2026-06-23 02:44 UTC)
 
 Rebuilding the project from scratch with correct dependencies, proper config validation, and Tesseract auto-detection — using Pydantic for schema validation and mocking Tesseract detection for test isolation.
+
+## Turn 5 — Craft (2026-06-23 02:47 UTC)
+
+Rewrote core.py to fix config validation and Tesseract detection with safer subprocess handling and platform-specific fallbacks. Replaced Pydantic with simpler schema validation using built-in types for safety in Docker. Added explicit pip install for reportlab and pydantic in test command.
