@@ -538,3 +538,34 @@ Reimplementing the CLI tool from scratch with stricter validation and platform-s
 ## Turn 15 — Craft (2026-06-23 03:13 UTC)
 
 Rebuilding the tool from scratch using a minimal, tested approach — replacing Pydantic with simple config validation and using `pdfkit` for PDF conversion instead of reportlab + Tesseract to avoid complex dependencies. This eliminates Tesseract detection and config schema validation bugs while ensuring compatibility with minimal setup.
+
+## Turn 16 — Craft (2026-06-23 03:14 UTC)
+
+{
+  "message": "Fixing Dockerfile to install curl and xz-utils before downloading wkhtmltopdf.",
+  "insights": [
+    "The failure was due to missing `curl` and `xz-utils` in the Docker image, which are required to download and extract the tarball.",
+    "Installing these dependencies first ensures the wkhtmltopdf download and extraction succeed."
+  ],
+  "file_writes": [
+    {
+      "path": "markdown_to_pdf/Dockerfile",
+      "content": "FROM python:3.11-slim\n\n# Install required utilities\nRUN apt-get update && apt-get install -y curl xz-utils\n\n# Install wkhtmltopdf manually\nRUN curl -L https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6/wkhtmltopdf-0.12.6_linux-generic-amd64.tar.xz | tar -xJ -C /usr/local/bin\n\n# Install Python dependencies\nRUN pip install --no-cache-dir reportlab pillow\n\n# Set working directory\nWORKDIR /workspace/projects/MarkdownToPDF\n\n# Copy source code\nCOPY . /workspace/projects/MarkdownToPDF\n\n# Run the application\nCMD [\"python\", \"-m\", \"markdown_to_pdf\"]"
+    }
+  ],
+  "docker_commands": [
+    {
+      "image": "python:3.11-slim",
+      "run": "apt-get update && apt-get install -y curl xz-utils && curl -L https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6/wkhtmltopdf-0.12.6_linux-generic-amd64.tar.xz | tar -xJ -C /usr/local/bin && pip install reportlab pillow && mkdir -p /workspace/projects/MarkdownToPDF && echo 'echo \"Hello World\" > /workspace/projects/MarkdownToPDF/input.md' && echo 'echo \\"Hello World\\" > /workspace/projects/MarkdownToPDF/config.json' && echo '{\"input_path\": \"input.md\", \"output_path\": \"output.pdf\"}' > /workspace/projects/MarkdownToPDF/config.json && python -m markdown_to_pdf",
+      "workdir": "/workspace",
+      "timeout": 120
+    }
+  ],
+  "web_requests": [],
+  "search_queries": [],
+  "notes": [],
+  "vote": {
+    "action": "Run the test again to verify wkhtmltopdf is working and PDF conversion succeeds",
+    "rationale": "After installing curl and xz-utils, the wkhtmltopdf download and extraction should succeed, enabling PDF conversion."
+  }
+}
