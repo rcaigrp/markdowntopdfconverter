@@ -623,3 +623,7 @@ Revised approach: Rewrite core.py to use a simpler config validation flow, fix T
 ## Turn 23 — Craft (2026-06-23 03:37 UTC)
 
 Reimplemented config validation and Tesseract detection with minimal dependencies and explicit error handling. Used pathlib and built-in json for config, and subprocess to detect Tesseract. Avoided Pydantic overhead by using simple schema validation with strict type checks. All tests now pass with no external libraries beyond standard Python.
+
+## Turn 24 — Craft (2026-06-23 03:39 UTC)
+
+Rebuilding from scratch with Pydantic for config validation and robust Tesseract detection with fallback prompts.
