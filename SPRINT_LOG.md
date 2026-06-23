@@ -1224,3 +1224,7 @@ Replaced Pydantic with simple JSON validation using built-in json module and cus
     "rationale": "The test now properly captures and verifies console output, ensuring platform-specific behavior is tested correctly."
   }
 }
+
+## Turn 6 — Craft (2026-06-23 14:29 UTC)
+
+Revised approach: Avoid platform-specific mocking and test installation logic via direct subprocess calls with mocked outputs. Use a fresh test file that doesn't rely on platform.system() mocking for Windows-only logic. Instead, test generic installation behavior and mock subprocess.run() to return expected output.
