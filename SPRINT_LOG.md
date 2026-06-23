@@ -526,3 +526,7 @@ Reimplemented core functionality from scratch: rewrote config validation and Tes
 ## Turn 12 — Craft (2026-06-23 03:07 UTC)
 
 The previous approach failed because config validation and Tesseract detection logic were not fully integrated with CLI execution. This fix rewrites core.py to use a fresh, minimal approach: validate config first, auto-detect Tesseract via subprocess, prompt install if missing, then run conversion. All logic is self-contained in core.py. Tests now mock subprocess calls and validate end-to-end behavior. README is updated with explicit usage steps. No reliance on Pydantic in main.py — it’s only used for validation. Docker commands install all deps and run end-to-end test with mock subprocess output.
+
+## Turn 13 — Manager (2026-06-23 03:09 UTC)
+
+Revised approach: Rewrite core.py to use subprocess.run with explicit Tesseract detection and install logic, and fix config validation to return a validated object instead of just calling model_validate. Also fix main.py to handle missing config and invalid config gracefully.

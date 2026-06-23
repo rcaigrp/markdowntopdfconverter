@@ -1,4 +1,1 @@
-{
-  "input_path": "input.md",
-  "output_path": "output.pdf"
-}
+{"input": "input.md", "output": "output.pdf", "font_size": 12, "margin": "0.5in"}

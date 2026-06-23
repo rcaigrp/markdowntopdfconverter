@@ -5,7 +5,7 @@ A simple Python CLI tool to convert Markdown documents to PDF files using report
 ## Installation
 
 ```bash
-pip install reportlab pydantic
+pip install reportlab pillow
 ```
 
 ## Usage
@@ -14,8 +14,7 @@ pip install reportlab pydantic
 ```json
 {
   "input_path": "input.md",
-  "output_path": "output.pdf",
-  "tesseract_path": "tesseract"
+  "output_path": "output.pdf"
 }
 ```
 
@@ -29,25 +28,21 @@ python -m markdown_to_pdf
 ## Configuration
 
 - `config.json`: Defines input and output file paths.
-- `tesseract_path`: Optional path to Tesseract executable (auto-detected on Linux/macOS).
 
 ## Tesseract Installation (Linux/macOS)
 
-Install Tesseract using your system package manager:
-
-Linux (Debian/Ubuntu):
+On Linux:
 ```bash
 sudo apt-get install tesseract-ocr
 ```
 
-macOS (using Homebrew):
+On macOS:
 ```bash
 brew install tesseract
 ```
 
 ## Dependencies
 
-- Python 3.8+
-- Pydantic for config validation
-- Reportlab for PDF generation
-- Tesseract (for image-based Markdown if needed)
+- `reportlab`: For PDF generation.
+- `pillow`: For image handling (needed by reportlab).
+- `tesseract`: For OCR (if converting images).
