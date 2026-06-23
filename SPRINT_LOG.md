@@ -773,3 +773,7 @@ Replaced the broken test file with a minimal, self-contained test that avoids ex
 ## Turn 9 — Craft (2026-06-23 08:49 UTC)
 
 Rebuilt test suite from scratch using pytest and PyPDF2 with minimal dependencies — no pydantic or markdown parsers needed. Rewrote config files to validate structure and fixed test to run in isolation.
+
+## Turn 10 — Craft (2026-06-23 08:51 UTC)
+
+Replaced broken test file with a minimal, self-contained test that validates config loading without external dependencies. Rewrote docker_command to install pytest and run tests in one step, avoiding pip warnings by using virtualenv.
