@@ -719,3 +719,7 @@ Fixed Tesseract installation for Debian/Ubuntu by installing 'tesseract-ocr' and
 ## Turn 39 — Craft (2026-06-23 04:34 UTC)
 
 Fixed Tesseract detection and installation logic to use 'tesseract-ocr' on Debian/Ubuntu and validate via `tesseract --version` before proceeding.
+
+## Turn 40 — Craft (2026-06-23 04:35 UTC)
+
+Fixed config validation in converter.py to throw clear error messages on invalid config using Pydantic.
