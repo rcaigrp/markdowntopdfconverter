@@ -1082,3 +1082,7 @@ Previous attempt failed because test file path was incorrect and pip was run as 
 ## Turn 24 — Craft (2026-06-23 12:29 UTC)
 
 Fix config validation with Pydantic by patching config.py and updating main.py to handle validation errors gracefully, then run tests to verify.
+
+## Turn 25 — Craft (2026-06-23 12:30 UTC)
+
+Patched config.py with Pydantic model and updated main.py to handle ValidationError with clear user messages. Fixed test file path and added missing import in config.py.
