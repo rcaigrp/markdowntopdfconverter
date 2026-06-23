@@ -1416,3 +1416,7 @@ Rethinking from scratch — the issue is not with the test code but with the tes
 ## Turn 39 — Craft (2026-06-23 16:11 UTC)
 
 Previous test failed due to incorrect test file path and missing dependencies. Rewriting test file with correct path and adding required packages in test command.
+
+## Turn 40 — Craft (2026-06-23 16:12 UTC)
+
+Fixed test_config_validation.py to use correct relative path and implemented Pydantic schema validation with clear error messages.
