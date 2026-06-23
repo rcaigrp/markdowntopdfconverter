@@ -861,3 +861,7 @@ The previous attempt failed due to debconf frontend issues and dependency confli
 ## Turn 31 — Critic (2026-06-23 09:22 UTC)
 
 Previous attempt failed due to debconf/Term::ReadLine issues in Debian-based container. This is a packaging/dependency conflict, not a code issue. We must avoid installing git via apt-get and instead use a minimal Python image with git pre-installed or install git via pipx or curl.
+
+## Turn 32 — Manager (2026-06-23 09:25 UTC)
+
+Fixed the Tesseract auto-install logic to avoid debconf frontend issues by using `--no-install-recommends` and disabling interactive prompts via `--assume-yes` flag. Also added `--no-install-recommends` to `apt-get install` to reduce overhead and avoid interactive prompts in Docker.
