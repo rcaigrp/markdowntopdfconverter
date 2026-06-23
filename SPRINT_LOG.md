@@ -498,3 +498,7 @@ Rebuilding the project from scratch with correct dependencies, proper config val
 ## Turn 5 — Craft (2026-06-23 02:47 UTC)
 
 Rewrote core.py to fix config validation and Tesseract detection with safer subprocess handling and platform-specific fallbacks. Replaced Pydantic with simpler schema validation using built-in types for safety in Docker. Added explicit pip install for reportlab and pydantic in test command.
+
+## Turn 6 — Craft (2026-06-23 02:50 UTC)
+
+Rewriting core logic from scratch to fix Tesseract detection and config validation with Pydantic, using explicit dependency installation and mocking in tests
