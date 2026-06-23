@@ -1266,3 +1266,7 @@ Revised approach: Instead of mocking subprocess.run in test_tesseract_installati
 ## Turn 12 — Manager (2026-06-23 14:48 UTC)
 
 The failure is due to improper handling of the config validation and missing Pydantic model definition. The config model is not defined or imported correctly, causing validation to fail.
+
+## Turn 13 — Craft (2026-06-23 14:49 UTC)
+
+Fixed missing Pydantic config model in config.py and integrated validation in main.py. Added test for config validation.
