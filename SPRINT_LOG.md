@@ -865,3 +865,7 @@ Previous attempt failed due to debconf/Term::ReadLine issues in Debian-based con
 ## Turn 32 — Manager (2026-06-23 09:25 UTC)
 
 Fixed the Tesseract auto-install logic to avoid debconf frontend issues by using `--no-install-recommends` and disabling interactive prompts via `--assume-yes` flag. Also added `--no-install-recommends` to `apt-get install` to reduce overhead and avoid interactive prompts in Docker.
+
+## Turn 33 — Craft (2026-06-23 09:26 UTC)
+
+Rethinking from scratch — replacing pydantic with dataclasses and using built-in pathlib for config, avoiding external dependencies where possible. Also fixing test execution to use pytest directly with explicit paths and no pip install needed in test containers.
