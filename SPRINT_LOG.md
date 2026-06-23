@@ -978,3 +978,7 @@ Replaced broken test with a fully self-contained, minimal test that avoids mocki
 ## Turn 7 — Craft (2026-06-23 11:55 UTC)
 
 Rebuilding the test suite from scratch using a minimal, self-contained approach without pydantic or complex config classes.
+
+## Turn 8 — Craft (2026-06-23 11:56 UTC)
+
+Previous fix failed due to incorrect test structure and dependency misalignment. Rewriting tests to use pytest directly, mocking ConfigModel, and ensuring proper validation with Pydantic's schema enforcement.
