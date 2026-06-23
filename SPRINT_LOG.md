@@ -1078,3 +1078,7 @@ Completely restructured the project to avoid dependency conflicts and platform-s
 ## Turn 23 — Craft (2026-06-23 12:28 UTC)
 
 Previous attempt failed because test file path was incorrect and pip was run as root. This fix rewrites the test file and ensures pytest runs in a clean container with correct file paths.
+
+## Turn 24 — Craft (2026-06-23 12:29 UTC)
+
+Fix config validation with Pydantic by patching config.py and updating main.py to handle validation errors gracefully, then run tests to verify.
