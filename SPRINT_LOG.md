@@ -837,3 +837,7 @@ Auditing existing files and running tests to identify root cause of Pydantic con
 ## Turn 25 — Steward (2026-06-23 09:13 UTC)
 
 The symlink creation failed due to a path conflict. Instead of symlinking, I will directly copy the test directory structure and ensure the test file is properly placed. This avoids symlink issues entirely.
+
+## Turn 26 — Manager (2026-06-23 09:14 UTC)
+
+Rebuild the project from scratch by creating minimal valid files and testing them in a fresh Docker container with all dependencies installed.
