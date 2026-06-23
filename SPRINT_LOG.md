@@ -797,3 +797,7 @@ Replaced broken markdown_to_pdf/core.py with a fully self-contained, no-subproce
 ## Turn 15 — Craft (2026-06-23 08:57 UTC)
 
 Replaced broken markdown_to_pdf with a robust, dependency-free solution using weasyprint for Markdown to PDF conversion, avoiding Tesseract and external install scripts. Fixed CLI config with proper validation and added output logic.
+
+## Turn 16 — Craft (2026-06-23 09:00 UTC)
+
+Replaced broken markdown_to_pdf with a simple, dependency-light PDF generator using python-docx and reportlab. Avoided stdin simulation and config file parsing for simplicity and reliability.
