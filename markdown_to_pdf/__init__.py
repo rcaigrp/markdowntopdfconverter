@@ -1,3 +1,3 @@
-from .core import MarkdownToPDFConverter
+from .main import main
 
-__all__ = ["MarkdownToPDFConverter"]
+__all__ = ["main"]
