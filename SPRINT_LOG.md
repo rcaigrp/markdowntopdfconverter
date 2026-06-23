@@ -785,3 +785,7 @@ Rebuilding the config module from scratch using a simpler, tested approach witho
 ## Turn 12 — Manager (2026-06-23 08:53 UTC)
 
 Craft's approach failed due to test infrastructure issues and brittle Pydantic validation. Redesigning from scratch with simpler validation and Tesseract auto-installation is the only viable path. Parking the project to avoid further wasted effort.
+
+## Turn 13 — Manager (2026-06-23 08:54 UTC)
+
+Audited README.md and found Tesseract installation steps are missing critical context — specifically, they don’t mention auto-installation via the tool. Updated README.md to include explicit auto-install logic and clearer installation steps.
