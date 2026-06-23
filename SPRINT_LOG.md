@@ -506,3 +506,7 @@ Rewriting core logic from scratch to fix Tesseract detection and config validati
 ## Turn 7 — Craft (2026-06-23 02:53 UTC)
 
 Reimplementing from scratch with a cleaner, more robust approach: using Pydantic for config validation, auto-detecting Tesseract via system-specific commands, and fixing dependency management. Replacing the old convert.py with a new core.py that handles detection and validation, and rewriting README.md with clear steps.
+
+## Turn 8 — Manager (2026-06-23 02:57 UTC)
+
+Rebuilding from scratch with correct virtualenv setup and direct dependency installation in Docker to avoid PATH issues and permission warnings.
