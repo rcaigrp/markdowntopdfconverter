@@ -944,3 +944,7 @@ Fixing import errors and ensuring correct file structure and test execution
 ## Turn 2 — Manager (2026-06-23 11:30 UTC)
 
 Fixing the broken config validation test by correcting the test file to use the correct import path and fixing the test logic to match actual Pydantic validation behavior.
+
+## Turn 3 — Manager (2026-06-23 11:31 UTC)
+
+Updated README.md with correct Tesseract installation steps for Linux/macOS and removed misleading note about Tesseract being unnecessary.
