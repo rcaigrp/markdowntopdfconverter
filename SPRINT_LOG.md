@@ -534,3 +534,7 @@ Revised approach: Rewrite core.py to use subprocess.run with explicit Tesseract 
 ## Turn 14 — Craft (2026-06-23 03:11 UTC)
 
 Reimplementing the CLI tool from scratch with stricter validation and platform-specific Tesseract detection using a more robust approach with subprocess and direct command execution.
+
+## Turn 15 — Craft (2026-06-23 03:13 UTC)
+
+Rebuilding the tool from scratch using a minimal, tested approach — replacing Pydantic with simple config validation and using `pdfkit` for PDF conversion instead of reportlab + Tesseract to avoid complex dependencies. This eliminates Tesseract detection and config schema validation bugs while ensuring compatibility with minimal setup.
