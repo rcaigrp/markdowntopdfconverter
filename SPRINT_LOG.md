@@ -777,3 +777,7 @@ Rebuilt test suite from scratch using pytest and PyPDF2 with minimal dependencie
 ## Turn 10 — Craft (2026-06-23 08:51 UTC)
 
 Replaced broken test file with a minimal, self-contained test that validates config loading without external dependencies. Rewrote docker_command to install pytest and run tests in one step, avoiding pip warnings by using virtualenv.
+
+## Turn 11 — Craft (2026-06-23 08:52 UTC)
+
+Rebuilding the config module from scratch using a simpler, tested approach without Pydantic — using built-in Python validation and minimal dependencies.
