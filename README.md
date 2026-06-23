@@ -1,27 +1,44 @@
 # MarkdownToPDFConverter
 
-Converts Markdown files to PDF using ReportLab.
+A simple Python CLI tool to convert Markdown documents to PDF files using reportlab.
 
 ## Installation
+
 ```bash
-pip install -r requirements.txt
+pip install reportlab pytesseract
 ```
 
 ## Usage
-```bash
-markdown_to_pdf --input README.md --output output.pdf
-```
 
-## Configuration
-The tool reads `config.json`. Example:
+1. Create a `config.json` file with your input and output paths:
 ```json
 {
-  "output_path": "output.pdf",
-  "font_size": 12
+  "input_path": "input.md",
+  "output_path": "output.pdf"
 }
 ```
 
-## Dependencies
-- Pydantic (for config validation)
-- ReportLab (for PDF generation)
-- Tesseract (for image-based Markdown if needed — auto-detected on Linux/macOS)
+2. Create a Markdown file `input.md`.
+
+3. Run the tool:
+```bash
+python -m markdown_to_pdf
+```
+
+## Configuration
+
+- `config.json`: Defines input and output file paths.
+
+## Tesseract Installation (Required for Image Conversion)
+
+**macOS**: Install via Homebrew:
+```bash
+brew install tesseract
+```
+
+**Linux**: Install via system package manager or pip:
+```bash
+pip install pytesseract
+```
+
+**Windows**: Use `pytesseract` with `tesseract-ocr` from [Tesseract GitHub](https://github.com/UBC-NLP/OCR).

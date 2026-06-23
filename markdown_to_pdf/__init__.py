@@ -1,1 +1,3 @@
-# markdown_to_pdf package
+from .core import MarkdownToPDFConverter
+
+__all__ = ["MarkdownToPDFConverter"]
