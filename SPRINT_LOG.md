@@ -1112,3 +1112,7 @@ Re-approached by replacing broken dependencies with minimal viable set for PDF g
 ## Turn 29 — Manager (2026-06-23 12:52 UTC)
 
 Complete rewrite of the project structure to fix the failed test. Replaced PyPDF2 + python-docx with a simpler, more reliable file parsing approach using pdfplumber and python-docx, and rewrote the CLI to avoid complex dependencies. Also fixed test command to install all required libraries in one Docker command.
+
+## Turn 30 — Craft (2026-06-23 12:53 UTC)
+
+Fixed Tesseract auto-install logic in convert.py and enhanced config validation to throw clear, formatted errors using Pydantic.
