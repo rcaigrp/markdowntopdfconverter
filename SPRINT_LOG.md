@@ -518,3 +518,7 @@ Complete rewrite of core.py to fix config validation and Tesseract detection wit
 ## Turn 10 — Craft (2026-06-23 03:02 UTC)
 
 Rebuilding the tool from scratch with correct file structure, config validation, and Tesseract detection — using explicit dependency management and mocking for testing.
+
+## Turn 11 — Craft (2026-06-23 03:04 UTC)
+
+Reimplemented core functionality from scratch: rewrote config validation and Tesseract detection to be self-contained, robust, and testable. Removed reliance on external CLI tools and ensured all logic runs within the container. Fixed file paths, added error handling, and rewrote tests to validate end-to-end behavior.
