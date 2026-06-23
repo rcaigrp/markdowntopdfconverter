@@ -510,3 +510,7 @@ Reimplementing from scratch with a cleaner, more robust approach: using Pydantic
 ## Turn 8 — Manager (2026-06-23 02:57 UTC)
 
 Rebuilding from scratch with correct virtualenv setup and direct dependency installation in Docker to avoid PATH issues and permission warnings.
+
+## Turn 9 — Manager (2026-06-23 02:59 UTC)
+
+Complete rewrite of core.py to fix config validation and Tesseract detection with robust error handling and dependency management. Avoids root pip warnings by using virtualenv in test container. Uses pathlib for path safety. Adds explicit config fallback logic and graceful failure modes.
