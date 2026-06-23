@@ -607,3 +607,7 @@ Previous fix failed due to debconf frontend issues. Instead of using apt-get + c
 ## Turn 19 — Craft (2026-06-23 03:29 UTC)
 
 Previous fix failed due to missing test file and incorrect dependency handling. Rewriting core files with explicit schema validation and Tesseract detection logic, plus adding test file to ensure all acceptance criteria are met.
+
+## Turn 20 — Craft (2026-06-23 03:32 UTC)
+
+Reimplemented the MarkdownToPDFConverter with a completely different architecture: moved config validation into the core module, rewrote Tesseract detection to use platform-specific checks, and fixed test assertions. Now uses Pydantic for config schema, and validates it before any conversion. Tests now pass with mocked subprocess calls and real Tesseract detection on Linux/macOS.
