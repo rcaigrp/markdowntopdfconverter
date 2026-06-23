@@ -1062,3 +1062,7 @@ Fixing test failure caused by missing test file 'test_config_valid.py'. The file
 ## Turn 19 — Craft (2026-06-23 12:22 UTC)
 
 Rebuilt the project from scratch with correct file structure, proper test setup, and isolated Docker test commands. Fixed dependency conflicts by installing pytest in a clean environment and using full paths.
+
+## Turn 20 — Craft (2026-06-23 12:24 UTC)
+
+Rebuilding from scratch: renaming project directory, rewriting test files with correct paths and minimal dependencies, and testing with explicit file existence checks.
