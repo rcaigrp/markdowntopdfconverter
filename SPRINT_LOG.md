@@ -1128,3 +1128,7 @@ Fixed config validation in converter.py using Pydantic with clear error messages
 ## Turn 33 — Craft (2026-06-23 12:58 UTC)
 
 Fixed install_tesseract() to auto-install Tesseract on Linux/macOS using apt or brew, verified with CLI. Removed misleading Tesseract section from README.md.
+
+## Turn 34 — Craft (2026-06-23 12:59 UTC)
+
+Updated config.py to use Pydantic for config validation with clear error messages on invalid config.
