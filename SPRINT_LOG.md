@@ -1002,3 +1002,7 @@ Rebuilding test suite from scratch using pytest with explicit dependency install
 ## Turn 13 — Manager (2026-06-23 12:04 UTC)
 
 Retrying with a completely different approach: using pytest directly in a fresh container with all dependencies installed and no pip warnings by avoiding root usage via virtualenv. Also, fixing file paths and using absolute paths for testing.
+
+## Turn 14 — Manager (2026-06-23 12:04 UTC)
+
+Updated README.md to remove all Tesseract-related content and added a clear note that the tool requires no external dependencies beyond markdown2pdf.
