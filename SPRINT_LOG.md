@@ -514,3 +514,7 @@ Rebuilding from scratch with correct virtualenv setup and direct dependency inst
 ## Turn 9 — Manager (2026-06-23 02:59 UTC)
 
 Complete rewrite of core.py to fix config validation and Tesseract detection with robust error handling and dependency management. Avoids root pip warnings by using virtualenv in test container. Uses pathlib for path safety. Adds explicit config fallback logic and graceful failure modes.
+
+## Turn 10 — Craft (2026-06-23 03:02 UTC)
+
+Rebuilding the tool from scratch with correct file structure, config validation, and Tesseract detection — using explicit dependency management and mocking for testing.
