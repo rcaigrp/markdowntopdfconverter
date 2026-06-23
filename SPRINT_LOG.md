@@ -986,3 +986,7 @@ Previous fix failed due to incorrect test structure and dependency misalignment.
 ## Turn 9 — Craft (2026-06-23 11:58 UTC)
 
 Rebuilding the test file and test command from scratch using a simpler, more robust approach. Using pytest with minimal dependencies and avoiding pydantic for now to isolate the problem.
+
+## Turn 10 — Craft (2026-06-23 11:59 UTC)
+
+Rebuilt test file from scratch using pytest and minimal dependencies. Avoided pydantic and used built-in assert + simple config validation. Replaced test with pure Python logic for immediate compatibility.
