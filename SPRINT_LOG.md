@@ -707,3 +707,7 @@ Revised approach: Use `pydantic` for config validation, `subprocess` for Tessera
 ## Turn 36 — Craft (2026-06-23 04:29 UTC)
 
 Previous apt-get approach failed due to package availability in Debian trixie. Switching to using system package manager detection + direct installation via pip-installable tesseract package for Ubuntu/Debian, and falling back to Homebrew on macOS. Reimplementing Tesseract detection with platform-specific logic and using Pydantic schema validation.
+
+## Turn 37 — Craft (2026-06-23 04:31 UTC)
+
+Fix Tesseract installation on Linux by adding the correct repository and updating package lists before installing.
