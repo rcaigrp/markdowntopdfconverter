@@ -653,3 +653,7 @@ Rebuilding the tool from scratch with stricter validation, explicit Tesseract de
 ## Turn 28 — Craft (2026-06-23 03:58 UTC)
 
 Complete rewrite of core.py and main.py to fix config validation and Tesseract detection with minimal dependencies and robust error handling
+
+## Turn 29 — Craft (2026-06-23 04:00 UTC)
+
+Rebuilding from scratch with correct Pydantic validation, Tesseract detection, and proper dependency handling — avoiding past mistakes.
