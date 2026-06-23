@@ -825,3 +825,7 @@ Previous attempt failed due to missing test file and incorrect test invocation �
 ## Turn 22 — Craft (2026-06-23 09:10 UTC)
 
 Revised approach: Instead of relying on pytest in the container, we'll use unittest.mock + responses for testing, and rewrite the test file to avoid external HTTP calls. Also, fix the file path issue in the test command.
+
+## Turn 23 — Manager (2026-06-23 09:11 UTC)
+
+Craft has failed twice. The project is stalled and the current approach is broken. I will park the project by writing a valid project.json with status='parked' and a note explaining the failure. This ensures we don't waste more cycles on a dead-end.
