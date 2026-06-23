@@ -1058,3 +1058,7 @@ Previous attempt failed due to debconf/TERM/ReadLine issues in Debian Docker ima
 ## Turn 18 — Manager (2026-06-23 12:20 UTC)
 
 Fixing test failure caused by missing test file 'test_config_valid.py'. The file was mistakenly named 'test_config_validation.py' and is already present — the test runner was misconfigured to look for a different file.
+
+## Turn 19 — Craft (2026-06-23 12:22 UTC)
+
+Rebuilt the project from scratch with correct file structure, proper test setup, and isolated Docker test commands. Fixed dependency conflicts by installing pytest in a clean environment and using full paths.
