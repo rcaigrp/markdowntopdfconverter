@@ -849,3 +849,7 @@ Retrying with a completely different approach: using a virtual environment to av
 ## Turn 28 — Craft (2026-06-23 09:17 UTC)
 
 Adding Pydantic config validation to config.py and updating main.py to validate config before conversion.
+
+## Turn 29 — Craft (2026-06-23 09:18 UTC)
+
+Updated config.py with Pydantic model and fixed main.py to validate config before conversion. Also added Tesseract auto-install logic and updated README.md with clear installation steps.
