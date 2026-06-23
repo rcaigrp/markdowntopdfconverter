@@ -464,3 +464,7 @@ Resuming 'MarkdownToPDFConverter' project by updating project.json to 'active' a
 ## Turn 1 — Manager (2026-06-23 02:24 UTC)
 
 Rebuilding the project from scratch with a more robust approach: using a virtual environment, fixing config validation with Pydantic, and adding proper Tesseract detection with fallback prompts. All files rewritten, tests rewritten to use pytest with full dependencies installed in one docker command.
+
+## Turn 2 — Manager (2026-06-23 02:30 UTC)
+
+Previous Tesseract installation approach failed due to debconf frontend issues. New approach: use `tesseract` via `apt` on Debian-based systems, but fall back to `brew install tesseract` on macOS, and use `pip install pytesseract` for Python binding. Skip apt-get update if possible to avoid failures. Test with minimal Docker container and install Tesseract + PyTesseract via conditional logic.
